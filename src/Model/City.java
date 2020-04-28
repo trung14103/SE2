@@ -3,8 +3,6 @@ package Model;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
-
-import java.util.Date;
 import javax.persistence.*;
 
 @Data
@@ -21,6 +19,6 @@ public class City {
 
     @Column(name = "name")
     private String name;
-   
+
 }
 

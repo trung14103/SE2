@@ -13,6 +13,8 @@ import java.util.List;
 public class UserServiceImpl implements UserService {
     private static String SELECT_USER_BY_ID = "SELECT * FROM users WHERE id = ?";
 
+    private static String SELECT_USER_BY_NAME = "SELECT * FROM users WHERE username = ?";
+
     private static String SELECT_ALL_USER = "SELECT * FROM users;";
 
     private static String DELETE_USER_BY_ID = "DELETE FROM users WHERE id = ?;";
@@ -134,5 +136,41 @@ public class UserServiceImpl implements UserService {
             e.printStackTrace();
         }
         return isSuccess;
+    }
+
+    @Override
+    public User findUserByName(String username) {
+        Connection con = DBConnect.getConnection();
+        User user = new User();
+        try {
+            PreparedStatement ps = con.prepareStatement(SELECT_USER_BY_NAME);
+            ps.setString(1, username);
+            ResultSet rs = ps.executeQuery();
+            while (rs.next()) {
+                user.setId(rs.getLong("id"));
+                user.setUsername(rs.getString("username"));
+                user.setAddress(rs.getString("address"));
+                user.setEmail(rs.getString("email"));
+                user.setRole(rs.getString("role"));
+                user.setCreated_date(rs.getDate("created_date"));
+            }
+            con.close();
+        } catch (SQLException throwables) {
+            throwables.printStackTrace();
+        }
+        return user;
+    }
+
+    @Override
+    public boolean checkExistUser(String username, String oldUsername) {
+        if (!username.isEmpty()) {
+            User flagUser = findUserByName(username);
+            if (oldUsername == null) {
+                return flagUser == null;
+            } else {
+                return username.equals(oldUsername) || flagUser == null;
+            }
+        }
+        return true;
     }
 }

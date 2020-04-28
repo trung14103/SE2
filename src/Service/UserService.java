@@ -17,4 +17,8 @@ public interface UserService {
     void deleteUser(Long id);
 
     boolean login(String username, String password);
+
+    User findUserByName(String username);
+
+    boolean checkExistUser(String username, String oldUsername);
 }

@@ -1,17 +1,17 @@
 package Service;
 
 import Model.Country;
+import Model.User;
 import Utils.DBConnect;
 
-import java.sql.Connection;
-import java.sql.PreparedStatement;
-import java.sql.ResultSet;
-import java.sql.SQLException;
+import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
 
 public class CountryServiceImpl implements CountryService {
     private static String SELECT_COUNTRY_BY_ID = "SELECT * FROM countries WHERE id = ?";
+
+    private static String SELECT_COUNTRY_BY_Name = "SELECT * FROM countries WHERE name = ?";
 
     private static String SELECT_ALL_COUNTRY = "SELECT * FROM countries;";
 
@@ -22,7 +22,6 @@ public class CountryServiceImpl implements CountryService {
     private static String INSERT_COUNTRY = "INSERT INTO countries ( name, updated_day, continent) VALUES (?, ?, ?);";
 
     @Override
-
     public List<Country> findAll() {
         Connection con = DBConnect.getConnection();
         List<Country> countryList = new ArrayList<>();
@@ -33,10 +32,10 @@ public class CountryServiceImpl implements CountryService {
 
             while (rs.next()) {
             	Country country = new Country();
-            	Country.setId(rs.getLong("id"));
-            	Country.setName(rs.getString("name"));
-            	Country.setUpdatedDay(rs.getString("updated_day"));
-            	Country.setContinent(rs.getString("continent"));               
+                country.setId(rs.getLong("id"));
+                country.setName(rs.getString("name"));
+//                country.setUpdatedDay(rs.getDate("updated_day"));
+                country.setContinent(rs.getString("continent"));
             	countryList.add(country);
             }
             con.close();
@@ -54,7 +53,7 @@ public class CountryServiceImpl implements CountryService {
         try {
             PreparedStatement ps = con.prepareStatement(UPDATE_COUNTRY_BY_ID);
             ps.setString(1, country.getName());
-            ps.setString(2, country.getUpdated_day());
+            ps.setDate(2, (Date) country.getUpdated_day());
             ps.setString(3, country.getContinent());
             ps.executeUpdate();
             con.close();
@@ -69,7 +68,7 @@ public class CountryServiceImpl implements CountryService {
         try {
             PreparedStatement ps = con.prepareStatement(INSERT_COUNTRY);
             ps.setString(1, country.getName());
-            ps.setString(2, country.getUpdated_day());
+            ps.setDate(2, (Date) country.getUpdated_day());
             ps.setString(3, country.getContinent());
         } catch (SQLException throwables) {
             throwables.printStackTrace();
@@ -109,4 +108,37 @@ public class CountryServiceImpl implements CountryService {
         }
     }
 
+    @Override
+    public Country findCountryByName(String countryName) {
+        Connection con = DBConnect.getConnection();
+        Country country = new Country();
+        try {
+            PreparedStatement ps = con.prepareStatement(SELECT_COUNTRY_BY_Name);
+            ps.setString(1, countryName);
+            ResultSet rs = ps.executeQuery();
+            while (rs.next()) {
+                country.setId(rs.getLong("id"));
+                country.setName(rs.getString("name"));
+                country.setUpdated_day(rs.getDate("updated_day"));
+                country.setContinent(rs.getString("continent"));
+            }
+            con.close();
+        } catch (SQLException throwables) {
+            throwables.printStackTrace();
+        }
+        return country;
+    }
+
+    @Override
+    public boolean checkExistCountry(String countryName, String oldCountryName) {
+        if (!countryName.isEmpty()) {
+            Country flagUser = findCountryByName(countryName);
+            if (oldCountryName == null) {
+                return flagUser == null;
+            } else {
+                return countryName.equals(oldCountryName) || flagUser == null;
+            }
+        }
+        return true;
+    }
 }
