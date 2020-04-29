@@ -253,10 +253,10 @@ John Abraham</h5>
                             </h5>
                             <div class="card-body">
                                 <c:if test="${country != null}">
-                                    <form action="update" method="post" id="basicform" data-parsley-validate="">
+                                    <form action="<%request.getServletPath();%> ?command=update" method="post" id="basicform" data-parsley-validate="">
                                 </c:if>
                                 <c:if test="${country == null}">
-                                    <form action="insert" method="post" id="basicform" data-parsley-validate="">
+                                    <form action="<%request.getServletPath();%> ?command=insert" method="post" id="basicform" data-parsley-validate="">
                                 </c:if>
 
                                     <c:if test="${country != null}">
