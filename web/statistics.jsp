@@ -1,3 +1,5 @@
+<%@ page language="java" contentType="text/html; charset=UTF-8"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -21,7 +23,7 @@
     <!-- Latest compiled JavaScript -->
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js" defer></script>
     <script src="https://canvasjs.com/assets/script/canvasjs.min.js" defer></script>
-    <script src='./js/main.js' defer></script>
+    <script src='./assets/libs/js/main.js' defer></script>
 </head>
 <body>
   <nav class="navbar navbar-expand-md bg-dark navbar-dark"> 
@@ -51,33 +53,33 @@
   <div class="row">
     <div class="col box">
         <h2 class="header-box">GLOBAL</h2>
-        <img src="img/unflag.gif" id="flag" alt="global"/>
+        <img src="./assets/images/unflag.gif" id="flag" alt="global"/>
         <div class="infowrap">
           <div class="col-md-4">
             <div class="cases">INFECTED 
               <br>
-            2490516</div>
+            3,136,232</div>
           </div>
           <div class="col-md-4">
             <div class="deaths">DEATHS
               <br>
-            170590</div>
+            217,799</div>
           </div>
           <div class="col-md-4">
             <div class="recover">RECOVERED
               <br>
-            653577</div>
+            953,245</div>
           </div>
         </div>
     </div>
     <div class="col box">
       <h2 class="header-box">VIETNAM</h2>
-      <img src="img/VN.png" id="flag" alt="VN Flag"/>
+      <img src="./assets/images/VN.png" id="flag" alt="VN Flag"/>
       <div class="infowrap">
         <div class="col-md-4">
           <div class="cases">INFECTED
             <br>
-          268</div>
+          270</div>
         </div>
         <div class="col-md-4">
           <div class="deaths">DEATHS
@@ -87,12 +89,13 @@
         <div class="col-md-4">
           <div class="recover">RECOVERED
             <br>
-          216</div>
+          222</div>
         </div>
       </div>
     </div>
   </div>
   <br/>
+  <!--Row 2-->
     <div class="row">
       <div class="col box">
         <div id="chartContainer" style="height: 300px; width: 100%;"></div>
