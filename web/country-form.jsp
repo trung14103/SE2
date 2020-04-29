@@ -1,5 +1,5 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"%>
-<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
+
 <!doctype html>
 <html lang="en">
 
@@ -248,31 +248,31 @@ John Abraham</h5>
                     <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12">
                         <div class="card">
                             <h5 class="card-header">
-                                <c:if test="${countries == null"}>Add New Record Form</c:if>
-                                <c:if test="${countries != null"}>Update Form</c:if>
+                                <c:if test="${country == null"}>Add New Record Form</c:if>
+                                <c:if test="${country != null"}>Update Form</c:if>
                             </h5>
                             <div class="card-body">
-                                <c:if test="${countries != null}">
+                                <c:if test="${country != null}">
                                     <form action="update" method="post" id="basicform" data-parsley-validate="">
                                 </c:if>
-                                <c:if test="${countries == null}">
+                                <c:if test="${country == null}">
                                     <form action="insert" method="post" id="basicform" data-parsley-validate="">
                                 </c:if>
 
-                                    <c:if test="${countries != null}">
-                                        <input type="hidden" name="id" value="<c:out value='${countries.id}' />" />
+                                    <c:if test="${country != null}">
+                                        <input type="hidden" name="id" value="<c:out value='${country.id}' />" />
                                     </c:if>
 
-                                        <input type="hidden" name="userName">
+                                        <input type="hidden" name="oldCountryName">
 
                                     <div class="form-group">
                                         <label for="inputName">Country Name</label>
-                                        <input id="inputName" type="text" name="countries.name" value="<c:out value='${countries.name}' />" data-parsley-trigger="change" required="" placeholder="Country Name" autocomplete="off" class="form-control">
+                                        <input id="inputName" type="text" name="country.name" value="<c:out value='${country.name}' />" data-parsley-trigger="change" required="" placeholder="Country Name" autocomplete="off" class="form-control">
                                         <label id="err"></label>
                                     </div>
                                     <div class="form-group">
                                         <label for="inputContinent">Continent</label>
-                                        <input id="inputContinent" type="text" name="countries.continent" data-parsley-trigger="change" required="" value="<c:out value='${countries.continent}' />"  placeholder="Continent" autocomplete="off" class="form-control">
+                                        <input id="inputContinent" type="text" name="country.continent" data-parsley-trigger="change" required="" value="<c:out value='${country.continent}' />"  placeholder="Continent" autocomplete="off" class="form-control">
                                         <label id="err"></label>
                                     </div>
 
