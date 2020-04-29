@@ -19,6 +19,7 @@
     </content>
     <orderEntry type="inheritedJdk" />
     <orderEntry type="sourceFolder" forTests="false" />
+<<<<<<< HEAD
     <orderEntry type="library" name="Java EE 6-Java EE 6" level="project" />
     <orderEntry type="library" name="javax.annotation" level="project" />
     <orderEntry type="library" name="javax.transaction" level="project" />
@@ -26,5 +27,15 @@
     <orderEntry type="library" name="lombok" level="project" />
     <orderEntry type="library" name="javax.servlet-api-3.0.1" level="project" />
     <orderEntry type="library" name="Java EE 6-Java EE 6 (2)" level="project" />
+=======
+    <orderEntry type="library" name="lombok" level="project" />
+    <orderEntry type="library" name="httpclient-4.3.3" level="project" />
+    <orderEntry type="library" name="jstl-1.2" level="project" />
+    <orderEntry type="library" name="mysql-connector-java-8.0.19" level="project" />
+    <orderEntry type="library" name="jsp-api-2.2" level="project" />
+    <orderEntry type="library" name="servlet-api-2.5" level="project" />
+    <orderEntry type="library" name="Java EE 6-Java EE 6" level="project" />
+    <orderEntry type="library" name="javax.servlet-api-3.0.1" level="project" />
+>>>>>>> f6cf9e283f1086da1f638a1cfe8267a8ae110365
   </component>
 </module>
