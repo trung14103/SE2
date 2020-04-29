@@ -18,7 +18,6 @@ public class GeneralDataController extends HttpServlet {
     private static final long serialVersionUID = 1L;
     private GeneralDataService generalDataService;
 
-
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         doGet(request, response);
@@ -29,7 +28,6 @@ public class GeneralDataController extends HttpServlet {
         request.setCharacterEncoding("utf-8");
         response.setCharacterEncoding("utf-8");
 
-        //TO-DO: Implement switch-case structure for page navigation with request-response
         try {
             String action = request.getParameter("action");
             switch (action) {

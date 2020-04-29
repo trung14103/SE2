@@ -11,9 +11,11 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
+import java.sql.SQLException;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
+import java.util.List;
 
 @WebServlet(name = "userAPI", urlPatterns = "/user")
 public class UserController extends HttpServlet {
@@ -24,11 +26,73 @@ public class UserController extends HttpServlet {
 
     private PatternChecker patternChecker;
 
-    public UserController() {
-        super();
+    protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+       doGet(request, response);
     }
 
-    protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+    protected void doGet(HttpServletRequest request, HttpServletResponse response)
+            throws ServletException, IOException {
+        request.setCharacterEncoding("utf-8");
+        response.setCharacterEncoding("utf-8");
+        String command = request.getParameter("command");
+
+        switch (command) {
+            case "new":
+                showNewForm(request, response);
+                break;
+            case "insert":
+                insertUser(request, response);
+                break;
+            case "edit":
+                try {
+                    showEditForm(request, response);
+                    break;
+                } catch (SQLException throwables) {
+                    throwables.printStackTrace();
+                }
+            case "update":
+                try {
+                    updateUser(request, response);
+                    break;
+                } catch (SQLException throwables) {
+                    throwables.printStackTrace();
+                }
+            case "delete":
+                try {
+                    deleteUser(request,response);
+                    break;
+                } catch (SQLException throwables) {
+                    throwables.printStackTrace();
+                }
+            default:
+                try {
+                    listUser(request, response);
+                    break;
+                } catch (SQLException throwables) {
+                    throwables.printStackTrace();
+                }
+        }
+    }
+
+    private void listUser(HttpServletRequest request, HttpServletResponse response)
+            throws SQLException, IOException, ServletException {
+        List<User> listUser = userService.findAll();
+        request.setAttribute("listUser", listUser);
+        RequestDispatcher dispatcher = request.getRequestDispatcher("user-list.jsp");
+        dispatcher.forward(request, response);
+    }
+
+    private void showEditForm(HttpServletRequest request, HttpServletResponse response)
+            throws SQLException, ServletException, IOException {
+        Long id = Long.parseLong(request.getParameter("id"));
+        User existingUser = userService.findUserById(id);
+        RequestDispatcher dispatcher = request.getRequestDispatcher("add-user.jsp");
+        request.setAttribute("user", existingUser);
+        dispatcher.forward(request, response);
+    }
+
+    private void updateUser(HttpServletRequest request, HttpServletResponse response)
+            throws SQLException, IOException {
         request.setCharacterEncoding("utf-8");
         response.setCharacterEncoding("utf-8");
         Long id = Long.parseLong(request.getParameter("id"));
@@ -66,6 +130,39 @@ public class UserController extends HttpServlet {
             requestDispatcher.forward(request, response);
         } catch (Exception e) {
             e.printStackTrace();
+        }
+    }
+
+    private void deleteUser(HttpServletRequest request, HttpServletResponse response)
+            throws SQLException, IOException {
+        Long id = Long.parseLong(request.getParameter("id"));
+        userService.deleteUser(id);
+        response.sendRedirect("/user?command=list");
+    }
+
+    private void showNewForm(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+        RequestDispatcher requestDispatcher = request.getRequestDispatcher("add-user.jsp");
+        requestDispatcher.forward(request, response);
+    }
+
+    private void insertUser(HttpServletRequest request, HttpServletResponse response) throws IOException, ServletException {
+
+        User user = new User();
+        String username = request.getParameter("username");
+        if (userService.checkExistUser(username, null)) {
+            user.setUsername(request.getParameter("username"));
+            user.setAddress(request.getParameter("address"));
+            user.setPassword(request.getParameter("password"));
+            user.setEmail(request.getParameter("email"));
+            user.setRole(request.getParameter("role"));
+            user.setCreated_date(new Date());
+
+            userService.createUser(user);
+            response.sendRedirect("/user?command=list");
+        }else {
+            request.setAttribute("err", "User is already existed");
+            RequestDispatcher dispatcher = request.getRequestDispatcher("user-form.jsp");
+            dispatcher.forward(request, response);
         }
     }
 

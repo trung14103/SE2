@@ -23,8 +23,8 @@ public class CountryController extends HttpServlet {
 
     private CountryService countryService;
 
-    public CountryController() {
-        super();
+    protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+        doGet(request, response);
     }
 
     protected void doGet(HttpServletRequest req, HttpServletResponse res) throws ServletException, IOException {
@@ -59,7 +59,7 @@ public class CountryController extends HttpServlet {
             throws SQLException, IOException, ServletException {
         List<Country> listCountry = countryService.findAll();
         request.setAttribute("listCountry", listCountry);
-        RequestDispatcher dispatcher = request.getRequestDispatcher("/country-list.jsp");
+        RequestDispatcher dispatcher = request.getRequestDispatcher("/country-view.jsp");
         dispatcher.forward(request, response);
     }
 
@@ -142,10 +142,6 @@ public class CountryController extends HttpServlet {
         Long id = Long.parseLong(request.getParameter("id"));
         countryService.deleteCountry(id);
         response.sendRedirect(request.getServletPath() + "?command=list");
-    }
-
-    protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        doGet(request, response);
     }
 
     private static Date convertToDate(String dateString) {

@@ -1,3 +1,5 @@
+<%@ page language="java" contentType="text/html; charset=UTF-8"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -21,7 +23,7 @@
     <!-- Latest compiled JavaScript -->
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js" defer></script>
     <script src="https://canvasjs.com/assets/script/canvasjs.min.js" defer></script>
-    <script src='./js/main.js' defer></script>
+    <script src='./assets/libs/js/main.js' defer></script>
 </head>
 <body>
   <nav class="navbar navbar-expand-md bg-dark navbar-dark"> 
@@ -41,8 +43,8 @@
   <!--Sidenav-->
   <div id="mySidenav" class="sidenav">
     <a href="javascript:void(0)" class="closebtn" onclick="closeNav()">&times;</a>
-    <a href="#" class="active">Home</a>
-    <a href="#">About</a>
+    <a href="#">Home</a>
+    <a href="#" class="active">About</a>
     <a href="#">Contact</a>
   </div>
   

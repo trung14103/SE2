@@ -21,10 +21,6 @@ public class CityController extends HttpServlet {
 
     private CityService cityService;
 
-    public CityController() {
-        super();
-    }
-
     protected void doGet(HttpServletRequest req, HttpServletResponse res) throws ServletException, IOException {
         String command = req.getParameter("command");
         try {
@@ -57,7 +53,7 @@ public class CityController extends HttpServlet {
             throws SQLException, IOException, ServletException {
         List<City> listCity = cityService.findAll();
         request.setAttribute("listCity", listCity);
-        RequestDispatcher dispatcher = request.getRequestDispatcher("/city-list.jsp");
+        RequestDispatcher dispatcher = request.getRequestDispatcher("/city-view.jsp");
         dispatcher.forward(request, response);
     }
 
@@ -131,6 +127,6 @@ public class CityController extends HttpServlet {
     }
 
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-
+        doGet(request, response);
     }
 }
