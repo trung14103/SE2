@@ -1,0 +1,103 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="BranchesTreeState">
+    <expand>
+      <path>
+        <item name="ROOT" type="e8cecc67:BranchNodeDescriptor" />
+        <item name="LOCAL_ROOT" type="e8cecc67:BranchNodeDescriptor" />
+      </path>
+      <path>
+        <item name="ROOT" type="e8cecc67:BranchNodeDescriptor" />
+        <item name="REMOTE_ROOT" type="e8cecc67:BranchNodeDescriptor" />
+      </path>
+      <path>
+        <item name="ROOT" type="e8cecc67:BranchNodeDescriptor" />
+        <item name="REMOTE_ROOT" type="e8cecc67:BranchNodeDescriptor" />
+        <item name="GROUP_NODE:origin" type="e8cecc67:BranchNodeDescriptor" />
+      </path>
+    </expand>
+    <select />
+  </component>
+  <component name="ChangeListManager">
+    <list default="true" id="d983a96b-46f2-4b82-b016-da4150c5aadb" name="Default Changelist" comment="">
+      <change beforePath="$PROJECT_DIR$/SE2.iml" beforeDir="false" afterPath="$PROJECT_DIR$/SE2.iml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Controller/GeneralDataController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Controller/GeneralDataController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/web/covid-data-form.jsp" beforeDir="false" afterPath="$PROJECT_DIR$/web/GeneralDataForm.jsp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/web/covid-data-view.jsp" beforeDir="false" afterPath="$PROJECT_DIR$/web/GeneralDataList.jsp" afterDir="false" />
+    </list>
+    <option name="SHOW_DIALOG" value="false" />
+    <option name="HIGHLIGHT_CONFLICTS" value="true" />
+    <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
+    <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="CodeStyleSettingsInfer">
+    <option name="done" value="true" />
+  </component>
+  <component name="Git.Settings">
+    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
+  </component>
+  <component name="ProjectCodeStyleSettingsMigration">
+    <option name="version" value="1" />
+  </component>
+  <component name="ProjectId" id="1bDeY0pUipQ7GoCrro2CvmdASNj" />
+  <component name="ProjectViewState">
+    <option name="hideEmptyMiddlePackages" value="true" />
+    <option name="showLibraryContents" value="true" />
+  </component>
+  <component name="PropertiesComponent">
+    <property name="RunOnceActivity.OpenProjectViewOnStart" value="true" />
+    <property name="RunOnceActivity.ShowReadmeOnStart" value="true" />
+    <property name="WebServerToolWindowFactoryState" value="false" />
+    <property name="aspect.path.notification.shown" value="true" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$/lib" />
+    <property name="project.structure.last.edited" value="Libraries" />
+    <property name="project.structure.proportion" value="0.0" />
+    <property name="project.structure.side.proportion" value="0.2" />
+  </component>
+  <component name="SvnConfiguration">
+    <configuration />
+  </component>
+  <component name="TaskManager">
+    <task active="true" id="Default" summary="Default task">
+      <changelist id="d983a96b-46f2-4b82-b016-da4150c5aadb" name="Default Changelist" comment="" />
+      <created>1588171135643</created>
+      <option name="number" value="Default" />
+      <option name="presentableId" value="Default" />
+      <updated>1588171135643</updated>
+      <workItem from="1588171144132" duration="1159000" />
+    </task>
+    <servers />
+  </component>
+  <component name="TypeScriptGeneratedFilesManager">
+    <option name="version" value="2" />
+  </component>
+  <component name="Vcs.Log.Tabs.Properties">
+    <option name="TAB_STATES">
+      <map>
+        <entry key="MAIN">
+          <value>
+            <State />
+          </value>
+        </entry>
+      </map>
+    </option>
+  </component>
+  <component name="WindowStateProjectService">
+    <state x="389" y="110" key="FileChooserDialogImpl" timestamp="1588171172699">
+      <screen x="0" y="0" width="1366" height="738" />
+    </state>
+    <state x="389" y="110" key="FileChooserDialogImpl/1366.-1.1366.738/0.0.1366.738@0.0.1366.738" timestamp="1588171172699" />
+    <state x="163" y="0" key="SettingsEditor" timestamp="1588171178053">
+      <screen x="0" y="0" width="1366" height="738" />
+    </state>
+    <state x="163" y="0" key="SettingsEditor/1366.-1.1366.738/0.0.1366.738@0.0.1366.738" timestamp="1588171178053" />
+    <state x="1366" y="-1" width="1078" height="720" maximized="true" key="dock-window-1" timestamp="1588171593158">
+      <screen x="1366" y="-1" width="1366" height="738" />
+    </state>
+    <state x="1366" y="-1" width="1078" height="720" maximized="true" key="dock-window-1/1366.-1.1366.738/0.0.1366.738@0.0.1366.738" timestamp="1588171593158" />
+    <state x="1600" y="-1" width="1078" height="720" maximized="true" key="dock-window-2" timestamp="1588172305938">
+      <screen x="1366" y="-1" width="1366" height="738" />
+    </state>
+    <state x="1600" y="-1" width="1078" height="720" maximized="true" key="dock-window-2/1366.-1.1366.738/0.0.1366.738@0.0.1366.738" timestamp="1588172305938" />
+  </component>
+</project>
