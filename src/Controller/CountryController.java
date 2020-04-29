@@ -2,6 +2,8 @@ package Controller;
 
 import Model.Country;
 import Service.CountryService;
+import Service.CountryServiceImpl;
+import dao.HobbyDAO;
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
@@ -22,9 +24,13 @@ public class CountryController extends HttpServlet {
     private static final String dateFormat = "yyyy-MM-dd";
 
     private CountryService countryService;
+	public void init() {
+		countryService = new CountryServiceImpl();
+ 	}  
+	
 
-    protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        doGet(request, response);
+    public CountryController() {
+        super();
     }
 
     protected void doGet(HttpServletRequest req, HttpServletResponse res) throws ServletException, IOException {
@@ -142,6 +148,10 @@ public class CountryController extends HttpServlet {
         Long id = Long.parseLong(request.getParameter("id"));
         countryService.deleteCountry(id);
         response.sendRedirect(request.getServletPath() + "?command=list");
+    }
+
+    protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+        doGet(request, response);
     }
 
     private static Date convertToDate(String dateString) {
