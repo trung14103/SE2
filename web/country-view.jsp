@@ -1,5 +1,5 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"%>
-<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
+
 <!doctype html>
 <html lang="en">
  
@@ -260,69 +260,22 @@ John Abraham</h5>
                                                 <th>Country</th>
                                                 <th>Updated Date</th>
                                                 <th>Continent</th>
+                                                <th width="30%">Actions</th>
                                             </tr>
                                         </thead>
                                         <tbody>
+                                        <c:forEach var="country" items="${listCountry}">
                                             <tr>
-                                                <td>1</td>
-                                                <td>USA</td>
-                                                <td>27/04/2020</td>
-                                                <td>North America</td>
+                                                <td><c:out value="${country.id}"/></td>
+                                                <td><c:out value="${country.name}"/></td>
+                                                <td><c:out value="${country.updated_day}"/></td>
+                                                <td><c:out value="${country.continent}"/></td>
+                                                <td><a class="btn btn-info" href=<%request.getServletPath();%>"?command=edit&id=<c:out value='${country.id}' />">Edit</a>
+                       							 &nbsp;&nbsp;&nbsp;&nbsp; 
+                       							 <a class="btn btn-danger" href=<%request.getServletPath();%>"?command=delete&id=<c:out value='${country.id}' />">Delete</a>
+                    							</td>
                                             </tr>
-                                            <tr>
-                                                <td>2</td>
-                                                <td>Spain</td>
-                                                <td>27/04/2020</td>
-                                                <td>Europe</td>
-                                            </tr>
-                                            <tr>
-                                                <td>3</td>
-                                                <td>Italy</td>
-                                                <td>27/04/2020</td>
-                                                <td>Europe</td>
-                                            </tr>
-                                            <tr>
-                                                <td>4</td>
-                                                <td>France</td>
-                                                <td>26/04/2020</td>
-                                                <td>Europe</td>
-                                            </tr>
-                                            <tr>
-                                                <td>5</td>
-                                                <td>Germany</td>
-                                                <td>27/04/2020</td>
-                                                <td>Europe</td>
-                                            </tr>
-                                            <tr>
-                                                <td>6</td>
-                                                <td>UK</td>
-                                                <td>26/04/2020</td>
-                                                <td>Europe</td>
-                                            </tr>
-                                            <tr>
-                                                <td>7</td>
-                                                <td>Turkey</td>
-                                                <td>27/04/2020</td>
-                                                <td>Europe</td>
-                                            </tr>
-                                            <tr>
-                                                <td>8</td>
-                                                <td>Iran</td>
-                                                <td>27/04/2020</td>
-                                                <td>Asia</td>
-                                            </tr>
-                                            <tr>
-                                                <td>9</td>
-                                                <td>Russia</td>
-                                                <td>27/04/2020</td>
-                                                <td>Europe</td>
-                                            </tr>
-                                            <tr>
-                                                <td>10</td>
-                                                <td>China</td>
-                                                <td>27/04/2020</td>
-                                                <td>Asia</td>
-                                            </tr>
+                                        </c:forEach>                                           
                                         </tbody>
                                         <tfoot>
                                             <tr>
@@ -330,6 +283,7 @@ John Abraham</h5>
                                                 <th>Country</th>
                                                 <th>Updated Date</th>
                                                 <th>Continent</th>
+                                                <th width="30%">Actions</th>
                                             </tr>
                                         </tfoot>
                                     </table>
