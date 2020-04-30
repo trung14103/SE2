@@ -3,7 +3,6 @@ package Controller;
 import Model.Country;
 import Service.CountryService;
 import Service.CountryServiceImpl;
-import dao.HobbyDAO;
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
@@ -26,14 +25,11 @@ public class CountryController extends HttpServlet {
     private CountryService countryService;
 	public void init() {
 		countryService = new CountryServiceImpl();
- 	}  
-	
-
-    public CountryController() {
-        super();
-    }
+ 	}
 
     protected void doGet(HttpServletRequest req, HttpServletResponse res) throws ServletException, IOException {
+        req.setCharacterEncoding("utf-8");
+        res.setCharacterEncoding("utf-8");
         String command = req.getParameter("command");
         try {
             switch (command) {
@@ -92,7 +88,7 @@ public class CountryController extends HttpServlet {
 
         if (countryService.checkExistCountry(name, null)) {
             country.setName(request.getParameter("name"));
-            country.setUpdated_day(convertToDate(request.getParameter("updated_day")));
+            country.setUpdated_day(new Date());
             country.setContinent(request.getParameter("continent"));
             countryService.createCountry(country);
             response.sendRedirect(request.getServletPath() + "?command=list");
@@ -105,9 +101,9 @@ public class CountryController extends HttpServlet {
 
     private void updateCountry(HttpServletRequest request, HttpServletResponse response)
             throws SQLException, IOException {
-        Country country = new Country();
         request.setCharacterEncoding("utf-8");
         response.setCharacterEncoding("utf-8");
+        Country country = new Country();
         String name = request.getParameter("name");
         String continent = request.getParameter("continent");
 
@@ -126,7 +122,7 @@ public class CountryController extends HttpServlet {
         try {
             if (err.length() == 0) {
                 country.setName(request.getParameter("name"));
-                country.setUpdated_day(convertToDate(request.getParameter("updated_day")));
+                country.setUpdated_day(new Date());
                 country.setContinent(request.getParameter("continent"));
                 country.setId(Long.parseLong(request.getParameter("id")));
 

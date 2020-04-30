@@ -1,6 +1,7 @@
 package Service;
 
 import Model.City;
+import Model.Country;
 import Utils.DBConnect;
 
 import java.sql.Connection;
@@ -19,9 +20,11 @@ public class CityServiceImpl implements CityService {
 
     private static String DELETE_CITY_BY_ID = "DELETE FROM cities WHERE id = ?;";
 
-    private static String UPDATE_CITY_BY_ID = "UPDATE cities SET name = ?;";
+    private static String UPDATE_CITY_BY_ID = "UPDATE cities SET name = ?, country_id = ?;";
 
-    private static String INSERT_CITY = "INSERT INTO cities (name) VALUES (?);";
+    private static String INSERT_CITY = "INSERT INTO cities (name, country_id) VALUES (?, ?);";
+
+    private static CountryService countryService = new CountryServiceImpl();
 
     @Override
     public List<City> findAll() {
@@ -36,6 +39,8 @@ public class CityServiceImpl implements CityService {
                 City city = new City();
                 city.setId(rs.getLong("id"));
                 city.setName(rs.getString("name"));
+                city.setCountryId(rs.getLong("country_id"));
+                city.setCountry(countryService.findCountryById(rs.getLong("country_id")));
                 cityList.add(city);
             }
             con.close();
@@ -53,6 +58,7 @@ public class CityServiceImpl implements CityService {
         try {
             PreparedStatement ps = con.prepareStatement(UPDATE_CITY_BY_ID);
             ps.setString(1, city.getName());
+            ps.setLong(2, city.getCountryId());
             ps.executeUpdate();
             con.close();
         } catch (SQLException throwables) {
@@ -66,6 +72,9 @@ public class CityServiceImpl implements CityService {
         try {
             PreparedStatement ps = con.prepareStatement(INSERT_CITY);
             ps.setString(1, city.getName());
+            ps.setLong(2, city.getCountryId());
+            ps.executeUpdate();
+            con.close();
         } catch (SQLException throwables) {
             throwables.printStackTrace();
         }
@@ -82,6 +91,7 @@ public class CityServiceImpl implements CityService {
             while (rs.next()) {
                 city.setId(rs.getLong("id"));
                 city.setName(rs.getString("name"));
+                city.setCountryId(rs.getLong("country_id"));
             }
             con.close();
         } catch (SQLException throwables) {
@@ -96,6 +106,7 @@ public class CityServiceImpl implements CityService {
         try {
             PreparedStatement ps = con.prepareStatement(DELETE_CITY_BY_ID);
             ps.setLong(1, id);
+            ps.executeUpdate();
             con.close();
         } catch (SQLException throwables) {
             throwables.printStackTrace();
@@ -105,11 +116,11 @@ public class CityServiceImpl implements CityService {
     @Override
     public boolean checkExistCity(String cityName, String oldCityName) {
         if (!cityName.isEmpty()) {
-            City flagUser = findCityByName(cityName);
+            City flagCity = findCityByName(cityName);
             if (oldCityName == null) {
-                return flagUser == null;
+                return flagCity.getId() == null;
             } else {
-                return cityName.equals(oldCityName) || flagUser == null;
+                return cityName.equals(oldCityName) || flagCity.getId() == null;
             }
         }
         return true;
@@ -126,6 +137,8 @@ public class CityServiceImpl implements CityService {
             while (rs.next()) {
                 city.setId(rs.getLong("id"));
                 city.setName(rs.getString("name"));
+                city.setCountryId(rs.getLong("country_id"));
+                city.setCountry(countryService.findCountryById(rs.getLong("country_id")));
             }
             con.close();
         } catch (SQLException throwables) {

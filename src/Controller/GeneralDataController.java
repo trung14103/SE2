@@ -87,6 +87,7 @@ public class GeneralDataController extends HttpServlet {
         int death = Integer.parseInt(request.getParameter("death"));
         int country_id = Integer.parseInt(request.getParameter("country_id"));
         int city_id = Integer.parseInt(request.getParameter("city_id"));
+
         GeneralData GeneralData = new GeneralData(id, recovered, infected, critical, death, country_id, city_id);
         generalDataService.createGeneralData(GeneralData);
         response.sendRedirect(request.getContextPath() + "/GeneralData?action=List");

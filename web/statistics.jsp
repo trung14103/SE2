@@ -53,7 +53,7 @@
   <div class="row">
     <div class="col box">
         <h2 class="header-box">GLOBAL</h2>
-        <img src="./assets/images/unflag.gif" id="flag" alt="global"/>
+        <img src="./assets/images/unflag.gif" class="flag" alt="global"/>
         <div class="infowrap">
           <div class="col-md-4">
             <div class="cases">INFECTED 
@@ -74,7 +74,7 @@
     </div>
     <div class="col box">
       <h2 class="header-box">VIETNAM</h2>
-      <img src="./assets/images/VN.png" id="flag" alt="VN Flag"/>
+      <img src="./assets/images/VN.png" class="flag" alt="VN Flag"/>
       <div class="infowrap">
         <div class="col-md-4">
           <div class="cases">INFECTED

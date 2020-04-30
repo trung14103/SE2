@@ -12,7 +12,27 @@ import javax.servlet.annotation.WebServlet;
 public class LoginController extends HttpServlet {
     private UserService userService;
 
-    protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+    protected void loginView(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+        RequestDispatcher dispatcher = request.getRequestDispatcher("login.jsp");
+        dispatcher.forward(request, response);
+    }
+
+    protected  void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+        String command = request.getParameter("command");
+
+        switch (command) {
+            case "view":
+                loginView(request, response);
+                break;
+            case "check":
+                checkLogin(request, response);
+                break;
+        }
+    }
+
+    protected void checkLogin(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+        String command = request.getParameter("command");
+
         String username = request.getParameter("username");
         String password = request.getParameter("password");
         String url = "/login.jsp";

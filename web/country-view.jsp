@@ -1,5 +1,5 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"%>
-
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <!doctype html>
 <html lang="en">
  
@@ -270,9 +270,9 @@ John Abraham</h5>
                                                 <td><c:out value="${country.name}"/></td>
                                                 <td><c:out value="${country.updated_day}"/></td>
                                                 <td><c:out value="${country.continent}"/></td>
-                                                <td><a class="btn btn-info" href=<%request.getServletPath();%>"?command=edit&id=<c:out value='${country.id}' />">Edit</a>
+                                                <td><a class="btn btn-info" href=<%request.getServletPath();%>"?command=edit&id=<c:out value='${country.id}'/>">Edit</a>
                        							 &nbsp;&nbsp;&nbsp;&nbsp; 
-                       							 <a class="btn btn-danger" href=<%request.getServletPath();%>"?command=delete&id=<c:out value='${country.id}' />">Delete</a>
+                       							 <a class="btn btn-danger" href=<%request.getServletPath();%>"?command=delete&id=<c:out value='${country.id}'/>">Delete</a>
                     							</td>
                                             </tr>
                                         </c:forEach>                                           
