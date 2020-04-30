@@ -294,6 +294,7 @@ John Abraham</h5>
                                                 <th>Critical</th>
                                                 <th>Death</th>
                                                 <th>Recovered</th>
+                                                <th>Action</th>
                                             </tr>
                                         </tfoot>
                                     </table>

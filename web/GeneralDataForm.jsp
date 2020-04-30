@@ -248,8 +248,8 @@ John Abraham</h5>
                     <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12">
                         <div class="card">
                             <h5 class="card-header">
-                                <c:if test="${GeneralData == null"}>Add New Covid Data Form</c:if>
-                                <c:if test="${GeneralData != null"}>Update Form</c:if>
+                                <c:if test="${GeneralData == null}">Add New Covid Data Form</c:if>
+                                <c:if test="${GeneralData != null}">Update Form</c:if>
                             </h5>
                             <div class="card-body">
                                 <c:if test="${GeneralData != null}">
