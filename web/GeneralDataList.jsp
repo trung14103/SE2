@@ -278,9 +278,9 @@ John Abraham</h5>
                                                 <td><c:out value="${generalData.death}"/></td>
                                                 <td><c:out value="${generalData.recovered}"/></td>
                                                 <td><a class="btn btn-info"
-                                                       href=<%request.getServletPath();%>"/generalData?command=Edit&id=<c:out value='${generalData.id}' />">Edit</a>
+                                                       href=<%request.getServletPath();%>"/generalData?command=edit&id=<c:out value='${generalData.id}' />">Edit</a>
                                                     &nbsp;&nbsp;&nbsp;&nbsp; <a class="btn btn-danger"
-                                                                                href=<%request.getServletPath();%>"/generalData?command=Delete&id=<c:out value='${generalData.id}' />">Delete</a>
+                                                                                href=<%request.getServletPath();%>"/generalData?command=delete&id=<c:out value='${generalData.id}' />">Delete</a>
                                                 </td>
                                             </tr>
                                         </c:forEach>

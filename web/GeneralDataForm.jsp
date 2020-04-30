@@ -253,10 +253,10 @@ John Abraham</h5>
                             </h5>
                             <div class="card-body">
                                 <c:if test="${GeneralData != null}">
-                                    <form action="update" method="post" id="basicform" data-parsley-validate="">
+                                    <form action="<%request.getServletPath();%>/generalData?command=update" method="post" id="basicform" data-parsley-validate="">
                                 </c:if>
                                 <c:if test="${GeneralData== null}">
-                                    <form action="insert" method="post" id="basicform" data-parsley-validate="">
+                                    <form action="<%request.getServletPath();%>/generalData?command=insert" method="post" id="basicform" data-parsley-validate="">
                                 </c:if>
 
                                     <c:if test="${GeneralData != null}">
@@ -265,36 +265,42 @@ John Abraham</h5>
 
                                     <div class="form-group">
                                         <label for="inputCountry">Country ID</label>
-                                        <input id="inputCountry" type="number" name="covid_data.country_id" value="<c:out value='${GeneralData.country_id}' />" data-parsley-trigger="change" required="" placeholder="Country ID" autocomplete="off" class="form-control">
+                                        <input id="inputCountry" type="number" name="country_id"
+                                               value="<c:out value='${GeneralData.country_id}' />" data-parsley-trigger="change" required="" placeholder="Country ID" autocomplete="off" class="form-control">
                                         <label id="err"></label>
                                     </div>
                                     <div class="form-group">
                                         <label for="inputCity">City ID</label>
-                                        <input id="inputCity" type="number" name="covid_data.city_id" data-parsley-trigger="change" required="" value="<c:out value='${GeneralData.city_id}' />"  placeholder="City ID" autocomplete="off" class="form-control">
+                                        <input id="inputCity" type="number" name="city_id" data-parsley-trigger="change" required=""
+                                               value="<c:out value='${GeneralData.city_id}' />"  placeholder="City ID" autocomplete="off" class="form-control">
                                         <label id="err"></label>
                                     </div>
 
                                     <div class="form-group">
                                         <label for="inputInfected">Infected Cases</label>
-                                        <input id="inputInfected" type="number" name="covid_data.infected" data-parsley-trigger="change" required="" value="<c:out value='${GeneralData.infected}' />"  placeholder="Infected" autocomplete="off" class="form-control">
+                                        <input id="inputInfected" type="number" name="infected" data-parsley-trigger="change" required=""
+                                               value="<c:out value='${GeneralData.infected}' />"  placeholder="Infected" autocomplete="off" class="form-control">
                                         <label id="err"></label>
                                     </div>
 
                                     <div class="form-group">
                                         <label for="inputRecovered">Recovered</label>
-                                        <input id="inputRecovered" type="number" name="covid_data.recovered" data-parsley-trigger="change" required="" value="<c:out value='${GeneralData.recovered}' />"  placeholder="Recovered" autocomplete="off" class="form-control">
+                                        <input id="inputRecovered" type="number" name="recovered" data-parsley-trigger="change" required=""
+                                               value="<c:out value='${GeneralData.recovered}' />"  placeholder="Recovered" autocomplete="off" class="form-control">
                                         <label id="err"></label>
                                     </div>
 
                                     <div class="form-group">
                                         <label for="inputCritical">Critical</label>
-                                        <input id="inputCritical" type="number" name="covid_data.critical" data-parsley-trigger="change" required="" value="<c:out value='${GeneralData.critical}' />"  placeholder="Critical" autocomplete="off" class="form-control">
+                                        <input id="inputCritical" type="number" name="critical" data-parsley-trigger="change" required=""
+                                               value="<c:out value='${GeneralData.critical}' />"  placeholder="Critical" autocomplete="off" class="form-control">
                                         <label id="err"></label>
                                     </div>
 
                                     <div class="form-group">
                                         <label for="inputDeath">Death</label>
-                                        <input id="inputDeath" type="number" name="covid_data.death" data-parsley-trigger="change" required="" value="<c:out value='${GeneralData.death}' />"  placeholder="Death" autocomplete="off" class="form-control">
+                                        <input id="inputDeath" type="number" name="death" data-parsley-trigger="change" required=""
+                                               value="<c:out value='${GeneralData.death}' />"  placeholder="Death" autocomplete="off" class="form-control">
                                         <label id="err"></label>
                                     </div>
 

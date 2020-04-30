@@ -2,7 +2,6 @@ package Controller;
 
 import Service.GeneralDataService;
 import Model.GeneralData;
-import Service.GeneralDataServiceImpl;
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
@@ -19,8 +18,6 @@ public class GeneralDataController extends HttpServlet {
     private static final long serialVersionUID = 1L;
     private GeneralDataService generalDataService;
 
-    public void init() {generalDataService = new GeneralDataServiceImpl();
-    }
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         doGet(request, response);
@@ -32,21 +29,21 @@ public class GeneralDataController extends HttpServlet {
         response.setCharacterEncoding("utf-8");
 
         try {
-            String action = request.getParameter("command");
+            String action = request.getParameter("action");
             switch (action) {
-                case "New":
+                case "new":
                     showNewForm(request, response);
                     break;
-                case "Insert":
+                case "insert":
                     insertGeneralData(request, response);
                     break;
-                case "Edit":
+                case "edit":
                     showEditForm(request, response);
                     break;
-                case "Update":
+                case "update":
                     updateGeneralData(request, response);
                     break;
-                case "Delete":
+                case "delete":
                     deleteGeneralData(request, response);
                     break;
                 default:
@@ -60,9 +57,9 @@ public class GeneralDataController extends HttpServlet {
 
     private void listGeneralData(HttpServletRequest request, HttpServletResponse response)
             throws SQLException, IOException, ServletException {
-        List<GeneralData> generalDataList = generalDataService.findAll();
-        request.setAttribute("generalDataList", generalDataList);
-        RequestDispatcher dispatcher = request.getRequestDispatcher("GeneralDataList.jsp");
+        List<GeneralData> GeneralDataList = generalDataService.findAll();
+        request.setAttribute("listGeneralData", GeneralDataList);
+        RequestDispatcher dispatcher = request.getRequestDispatcher("list.jsp");
         dispatcher.forward(request, response);
     }
 
@@ -90,9 +87,10 @@ public class GeneralDataController extends HttpServlet {
         int death = Integer.parseInt(request.getParameter("death"));
         int country_id = Integer.parseInt(request.getParameter("country_id"));
         int city_id = Integer.parseInt(request.getParameter("city_id"));
+
         GeneralData GeneralData = new GeneralData(id, recovered, infected, critical, death, country_id, city_id);
         generalDataService.createGeneralData(GeneralData);
-        response.sendRedirect(request.getContextPath() + "/GeneralData?command=List");
+        response.sendRedirect(request.getContextPath() + "/GeneralData?action=List");
     }
 
     void updateGeneralData(HttpServletRequest request, HttpServletResponse response)
@@ -106,14 +104,14 @@ public class GeneralDataController extends HttpServlet {
         int city_id = Integer.parseInt(request.getParameter("city_id"));
         GeneralData GeneralData = new GeneralData(id, recovered, infected, critical, death, country_id, city_id);
         generalDataService.updateGeneralData(GeneralData);
-        response.sendRedirect(request.getContextPath() + "/GeneralData?command=List");
+        response.sendRedirect(request.getContextPath() + "/GeneralData?action=List");
     }
 
     void deleteGeneralData(HttpServletRequest request, HttpServletResponse response)
             throws SQLException, IOException {
         int id = Integer.parseInt(request.getParameter("id"));
         generalDataService.deleteGeneralData(id);
-        response.sendRedirect(request.getContextPath() + "/GeneralData?command=List");
+        response.sendRedirect(request.getContextPath() + "/GeneralData?action=List");
     }
 
 
