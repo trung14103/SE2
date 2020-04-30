@@ -27,8 +27,8 @@ public class GeneralDataServiceImpl implements GeneralDataService{
                 GeneralData.setInfected(rs.getInt("infected"));
                 GeneralData.setCritical(rs.getInt("critical"));
                 GeneralData.setDeath(rs.getInt("death"));
-                GeneralData.setCountry_id(rs.getInt("country_id"));
-                GeneralData.setCity_id(rs.getInt("city_id"));
+                GeneralData.setCountry_id(rs.getLong("country_id"));
+                GeneralData.setCity_id(rs.getLong("city_id"));
 
             }
             con.close();
@@ -55,8 +55,8 @@ public class GeneralDataServiceImpl implements GeneralDataService{
                 GeneralData.setInfected(rs.getInt("infected"));
                 GeneralData.setCritical(rs.getInt("critical"));
                 GeneralData.setDeath(rs.getInt("death"));
-                GeneralData.setCountry_id(rs.getInt("country_id"));
-                GeneralData.setCity_id(rs.getInt("city_id"));
+                GeneralData.setCountry_id(rs.getLong("country_id"));
+                GeneralData.setCity_id(rs.getLong("city_id"));
                 GeneralDataList.add(GeneralData);
             }
             con.close();
@@ -78,8 +78,8 @@ public class GeneralDataServiceImpl implements GeneralDataService{
             ps.setInt(2,GeneralData.getInfected());
             ps.setInt(3,GeneralData.getCritical());
             ps.setInt(4,GeneralData.getDeath());
-            ps.setInt(5,GeneralData.getCountry_id());
-            ps.setInt(6,GeneralData.getCity_id());
+            ps.setLong(5,GeneralData.getCountry_id());
+            ps.setLong(6,GeneralData.getCity_id());
             ps.setInt(7,GeneralData.getId());
             ps.executeUpdate();
         }catch (SQLException throwables) {
@@ -98,8 +98,8 @@ public class GeneralDataServiceImpl implements GeneralDataService{
             ps.setInt(2,GeneralData.getInfected());
             ps.setInt(3,GeneralData.getCritical());
             ps.setInt(4,GeneralData.getDeath());
-            ps.setInt(5,GeneralData.getCountry_id());
-            ps.setInt(6,GeneralData.getCity_id());
+            ps.setLong(5,GeneralData.getCountry_id());
+            ps.setLong(6,GeneralData.getCity_id());
             ps.executeUpdate();
         }catch (SQLException throwables) {
             throwables.printStackTrace();
