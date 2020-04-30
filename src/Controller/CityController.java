@@ -136,10 +136,6 @@ public class CityController extends HttpServlet {
             err = "City is already existed";
         }
 
-        if (err.length() > 0) {
-            request.setAttribute("error", err);
-        }
-
         try {
             if (err.length() == 0) {
                 City city = new City(id, name, countryId, countryService.findCountryById(countryId));
@@ -148,6 +144,7 @@ public class CityController extends HttpServlet {
             } else {
                 url = "/city-form.jsp";
                 RequestDispatcher requestDispatcher = getServletContext().getRequestDispatcher(url);
+                request.setAttribute("error", err);
                 requestDispatcher.forward(request, response);
             }
         } catch (Exception e) {

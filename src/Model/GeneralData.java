@@ -31,16 +31,16 @@ public class GeneralData {
     private int death;
 
     @Column(name = "country_id")
-    private int country_id;
+    private long country_id;
 
     @Column(name = "city_id")
-    private int city_id;
-//
-//    @ManyToOne(fetch = FetchType.LAZY)
-//    @JoinColumn(name = "country_id")
-//    private Country country;
-//
-//    @ManyToOne(fetch = FetchType.LAZY)
-//    @JoinColumn(name = "city_id")
-//    private City city;
+    private long city_id;
+
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "country_id")
+    private Country country;
+
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "city_id")
+    private City city;
 }
