@@ -149,16 +149,6 @@ public class CountryController extends HttpServlet {
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         doGet(request, response);
     }
-
-    private static Date convertToDate(String dateString) {
-        Date date = null;
-        try {
-            date = new SimpleDateFormat(dateFormat).parse(dateString);
-        } catch (ParseException e) {
-            e.printStackTrace();
-        }
-        return date;
-    }
 }
 
 
