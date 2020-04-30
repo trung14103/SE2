@@ -1,7 +1,10 @@
 package Controller;
 
+import Model.Country;
 import Model.User;
+import Service.CountryServiceImpl;
 import Service.UserService;
+import Service.UserServiceImpl;
 import Utils.PatternChecker;
 
 import javax.servlet.RequestDispatcher;
@@ -23,7 +26,9 @@ public class UserController extends HttpServlet {
     private static final String dateFormat = "yyyy-MM-dd";
 
     private UserService userService;
-
+    public void init() {
+    	userService = new UserServiceImpl();
+ 	}
     private PatternChecker patternChecker;
 
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
@@ -35,7 +40,6 @@ public class UserController extends HttpServlet {
         request.setCharacterEncoding("utf-8");
         response.setCharacterEncoding("utf-8");
         String command = request.getParameter("command");
-
         switch (command) {
             case "new":
                 showNewForm(request, response);
@@ -78,7 +82,7 @@ public class UserController extends HttpServlet {
             throws SQLException, IOException, ServletException {
         List<User> listUser = userService.findAll();
         request.setAttribute("listUser", listUser);
-        RequestDispatcher dispatcher = request.getRequestDispatcher("user-list.jsp");
+        RequestDispatcher dispatcher = request.getRequestDispatcher("/user-view.jsp");
         dispatcher.forward(request, response);
     }
 
@@ -86,7 +90,7 @@ public class UserController extends HttpServlet {
             throws SQLException, ServletException, IOException {
         Long id = Long.parseLong(request.getParameter("id"));
         User existingUser = userService.findUserById(id);
-        RequestDispatcher dispatcher = request.getRequestDispatcher("add-user.jsp");
+        RequestDispatcher dispatcher = request.getRequestDispatcher("/user-form.jsp");
         request.setAttribute("user", existingUser);
         dispatcher.forward(request, response);
     }
@@ -94,7 +98,7 @@ public class UserController extends HttpServlet {
     private void updateUser(HttpServletRequest request, HttpServletResponse response)
             throws SQLException, IOException {
         request.setCharacterEncoding("utf-8");
-        response.setCharacterEncoding("utf-8");
+        response.setCharacterEncoding("utf-8");       
         Long id = Long.parseLong(request.getParameter("id"));
         String username = request.getParameter("username");
         String email = request.getParameter("email");
@@ -120,7 +124,7 @@ public class UserController extends HttpServlet {
 
         try {
             if (err.length() == 0) {
-                User user = new User(id, username, password, address, email, role, created_date);
+            	User user = new User(id, username, email, address, password, role, created_date);
                 userService.updateUser(user);
                 url = "/home.jsp";
             } else {
@@ -137,14 +141,14 @@ public class UserController extends HttpServlet {
             throws SQLException, IOException {
         Long id = Long.parseLong(request.getParameter("id"));
         userService.deleteUser(id);
-        response.sendRedirect("/user?command=list");
+        response.sendRedirect(request.getServletPath() + "?command=list");
     }
 
     private void showNewForm(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        RequestDispatcher requestDispatcher = request.getRequestDispatcher("add-user.jsp");
+        RequestDispatcher requestDispatcher = request.getRequestDispatcher("/user-form.jsp");
         requestDispatcher.forward(request, response);
     }
-
+  
     private void insertUser(HttpServletRequest request, HttpServletResponse response) throws IOException, ServletException {
 
         User user = new User();
@@ -158,10 +162,10 @@ public class UserController extends HttpServlet {
             user.setCreated_date(new Date());
 
             userService.createUser(user);
-            response.sendRedirect("/user?command=list");
-        }else {
+            response.sendRedirect(request.getServletPath() + "?command=list");
+        } else {        
+            RequestDispatcher dispatcher = request.getRequestDispatcher("/user-form.jsp");
             request.setAttribute("err", "User is already existed");
-            RequestDispatcher dispatcher = request.getRequestDispatcher("user-form.jsp");
             dispatcher.forward(request, response);
         }
     }
