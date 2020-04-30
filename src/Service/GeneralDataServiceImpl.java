@@ -1,7 +1,5 @@
 package Service;
 
-import Model.City;
-import Model.Country;
 import Model.GeneralData;
 import Utils.DBConnect;
 

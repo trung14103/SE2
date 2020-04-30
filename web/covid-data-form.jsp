@@ -319,7 +319,6 @@ John Abraham</span>is now following you
                                                autocomplete="off" class="form-control">
                                         <label id="err_cityId"></label>
                                     </div>
-
                                     <div class="form-group">
                                         <label for="inputInfected">Infected Cases</label>
                                         <input id="inputInfected" type="number" name="infected"

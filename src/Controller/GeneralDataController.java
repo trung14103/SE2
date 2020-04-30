@@ -4,7 +4,6 @@ import Model.City;
 import Model.Country;
 import Service.*;
 import Model.GeneralData;
-
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;

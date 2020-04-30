@@ -268,7 +268,6 @@ John Abraham</span>is now following you
                                     </thead>
                                     <tbody>
                                     <c:forEach var="generalData" items="${listGeneralData}">
-
                                         <tr>
                                             <td><c:out value="${generalData.id}"/></td>
                                             <td><c:out value="${generalData.getCountry().name}"/></td>
