@@ -124,7 +124,7 @@ public class UserController extends HttpServlet {
 
         try {
             if (err.length() == 0) {
-            	User user = new User(id, username, email, address, password, role, created_date);
+            	User user = new User(id, username, password, address, email, role, created_date);
                 userService.updateUser(user);
                 url = "/home.jsp";
             } else {
