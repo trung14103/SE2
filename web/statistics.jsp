@@ -1,5 +1,5 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8"%>
-<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8" %>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -40,7 +40,20 @@
         </ul>
         <ul class="navbar-nav ml-auto">
             <li class="nav-item">
-                <a class="nav-link" href="#">Sign In</a>
+                <c:if test="${role == null }">
+                    <ul class="navbar-nav ml-auto">
+                        <li class="nav-item">
+                            <a class="nav-link" href="login?command=view">Sign In</a>
+                        </li>
+                    </ul>
+                </c:if>
+                <c:if test="${role == 'admin'}">
+                    <ul class="navbar-nav ml-auto">
+                        <li class="nav-item">
+                            <a class="nav-link" href="user?command=view">Admin Page</a>
+                        </li>
+                    </ul>
+                </c:if>
             </li>
         </ul>
     </div>
@@ -56,17 +69,20 @@
                 <div class="col-md-4">
                     <div class="cases">INFECTED
                         <br>
-                        3,237,600</div>
+                        3,237,600
+                    </div>
                 </div>
                 <div class="col-md-4">
                     <div class="deaths">DEATHS
                         <br>
-                        228,828</div>
+                        228,828
+                    </div>
                 </div>
                 <div class="col-md-4">
                     <div class="recover">RECOVERED
                         <br>
-                        1,010,260</div>
+                        1,010,260
+                    </div>
                 </div>
             </div>
         </div>
@@ -77,17 +93,20 @@
                 <div class="col-md-4">
                     <div class="cases">INFECTED
                         <br>
-                        270</div>
+                        270
+                    </div>
                 </div>
                 <div class="col-md-4">
                     <div class="deaths">DEATHS
                         <br>
-                        0</div>
+                        0
+                    </div>
                 </div>
                 <div class="col-md-4">
                     <div class="recover">RECOVERED
                         <br>
-                        219</div>
+                        219
+                    </div>
                 </div>
             </div>
         </div>
