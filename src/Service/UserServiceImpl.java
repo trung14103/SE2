@@ -3,10 +3,7 @@ package Service;
 import Model.User;
 import Utils.DBConnect;
 
-import java.sql.Connection;
-import java.sql.PreparedStatement;
-import java.sql.ResultSet;
-import java.sql.SQLException;
+import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -62,8 +59,8 @@ public class UserServiceImpl implements UserService {
             ps.setString(1, user.getUsername());
             ps.setString(2, user.getPassword());
             ps.setString(3, user.getEmail());
-            ps.setString(4, user.getRole());
-            ps.setString(5, user.getAddress());
+            ps.setString(5, user.getRole());
+            ps.setString(4, user.getAddress());
             ps.executeUpdate();
             con.close();
         } catch (SQLException throwables) {
@@ -81,6 +78,9 @@ public class UserServiceImpl implements UserService {
             ps.setString(3, user.getEmail());
             ps.setString(4, user.getRole());
             ps.setString(5, user.getAddress());
+            ps.setDate(6, convertDate(user.getCreated_date()));
+            ps.executeUpdate();
+            con.close();
         } catch (SQLException throwables) {
             throwables.printStackTrace();
         }
@@ -115,6 +115,7 @@ public class UserServiceImpl implements UserService {
         try {
             PreparedStatement ps = con.prepareStatement(DELETE_USER_BY_ID);
             ps.setLong(1, id);
+            ps.executeUpdate();
             con.close();
         } catch (SQLException throwables) {
             throwables.printStackTrace();
@@ -124,7 +125,7 @@ public class UserServiceImpl implements UserService {
     @Override
     public String login(String username, String password) {
         Connection con = DBConnect.getConnection();
-        String role="";
+        String role = "";
         try {
             PreparedStatement ps = con.prepareStatement(SELECT_USER_BY_NAME_PASSWORD);
             ps.setString(1, username);
@@ -168,11 +169,15 @@ public class UserServiceImpl implements UserService {
         if (!username.isEmpty()) {
             User flagUser = findUserByName(username);
             if (oldUsername == null) {
-                return flagUser == null;
+                return flagUser.getUsername() == null;
             } else {
                 return username.equals(oldUsername) || flagUser == null;
             }
         }
         return true;
+    }
+
+    private Date convertDate(java.util.Date dateUtil) {
+        return new Date(dateUtil.getTime());
     }
 }

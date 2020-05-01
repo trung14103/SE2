@@ -1,6 +1,5 @@
 package Controller;
 
-import Model.User;
 import Service.UserService;
 import Service.UserServiceImpl;
 
@@ -18,13 +17,13 @@ public class LoginController extends HttpServlet {
         userService = new UserServiceImpl();
     }
 
+    protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+        doGet(request, response);
+    }
+
     protected void loginView(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         RequestDispatcher dispatcher = request.getRequestDispatcher("login.jsp");
         dispatcher.forward(request, response);
-    }
-
-    protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        doGet(request, response);
     }
 
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
@@ -50,22 +49,19 @@ public class LoginController extends HttpServlet {
         if (username.isEmpty() && password.isEmpty()) {
             error = "Please fill in the necessary information";
         } else if (role.equals("")) {
-            error = "Username Or Password is valid";
-        }
-
-        if (error.length() > 0) {
-            request.setAttribute("error", error);
+            error = "Username Or Password Is Invalid";
         }
 
         try {
             if (error.length() == 0) {
                 HttpSession session = request.getSession();
                 session.setAttribute("role", role);
-                session.setMaxInactiveInterval(10*60);
+                session.setAttribute("username", username);
                 RequestDispatcher requestDispatcher = request.getRequestDispatcher("statistics.jsp");
                 System.out.println(request.getSession().getAttribute("role"));
                 requestDispatcher.forward(request, response);
             } else {
+                request.setAttribute("error", error);
                 RequestDispatcher requestDispatcher = getServletContext().getRequestDispatcher(url);
                 requestDispatcher.forward(request, response);
             }

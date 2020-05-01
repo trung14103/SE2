@@ -19,9 +19,10 @@
     <link rel="stylesheet" type="text/css" href="./assets/vendor/datatables/css/fixedHeader.bootstrap4.css">
 </head>
 <% //In case, if Admin session is not set, redirect to Login page
-    if((request.getSession(false).getAttribute("role") != "admin") )
+    if(!(request.getSession(false).getAttribute("role").equals("admin")))
     {
-        response.sendRedirect("/login.jsp");
+        RequestDispatcher requestDispatcher = request.getRequestDispatcher("/login.jsp");
+        requestDispatcher.forward(request, response);
     }%>
 <body>
 <!-- ============================================================== -->

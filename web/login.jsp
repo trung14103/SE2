@@ -33,7 +33,7 @@
         </div>
         <div class="col-md-4">
 
-            <form action="<%request.getServletPath();%> ?command=check" method="post" id="basicform" data-parsley-validate="">
+            <form action="/login?command=check" method="post" id="basicform" data-parsley-validate="">
             <h1 class="login-header">Login</h1>
             <div class="input-container">
                 <i class="fas fa-user" aria-hidden="true"></i>
@@ -41,6 +41,9 @@
                        data-parsley-trigger="change" required="" placeholder="UserName"
                        autocomplete="off" class="input-field">
             </div>
+                <c:if test="${error!= null}">
+                    <li style="color: red"><%=request.getAttribute("error")%></li>
+                </c:if>
             <div class="input-container">
                 <i class="fas fa-lock" aria-hidden="true"></i>
                 <input id="inputPws" type="text" name="password"

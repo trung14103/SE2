@@ -16,9 +16,10 @@
     <link rel="stylesheet" href="./assets/vendor/fonts/fontawesome/css/fontawesome-all.css">
 </head>
 <% //In case, if Admin session is not set, redirect to Login page
-    if((request.getSession(false).getAttribute("role") != "admin") )
+    if(!(request.getSession(false).getAttribute("role").equals("admin")))
     {
-        response.sendRedirect("/login.jsp");
+        RequestDispatcher requestDispatcher = request.getRequestDispatcher("/login.jsp");
+        requestDispatcher.forward(request, response);
     }%>
 <body>
 <!-- ============================================================== -->
