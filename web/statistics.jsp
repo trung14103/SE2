@@ -110,12 +110,15 @@
                 </thead>
                 <tbody>
                 <tr>
-                    <td><c:out value="${generalData.getCity().name}"/></td>
-                    <td><c:out value="${generalData.infected}"/></td>
-                    <td><c:out value="${generalData.critical}"/></td>
-                    <td><c:out value="${generalData.death}"/></td>
-                    <td><c:out value="${generalData.recovered}"/></td>
+                    <c:forEach var="vnData" items="${vnData}">
+                <tr>
+                    <td><c:out value="${vnData.getCity().name}"/></td>
+                    <td><c:out value="${vnData.infected}"/></td>
+                    <td><c:out value="${vnData.critical}"/></td>
+                    <td><c:out value="${vnData.death}"/></td>
+                    <td><c:out value="${vnData.recovered}"/></td>
                 </tr>
+                </c:forEach>
                 </tbody>
             </table>
         </div>

@@ -124,4 +124,32 @@ public class GeneralDataServiceImpl implements GeneralDataService {
             throwables.printStackTrace();
         }
     }
+
+    @Override
+    public List<GeneralData> findCityOfVietnam() {
+        Connection con = DBConnect.getConnection();
+        List<GeneralData> GeneralDataList = new ArrayList<>();
+        GeneralData generalData = new GeneralData();
+        try {
+            PreparedStatement ps = con.prepareStatement("SELECT * FROM covid_data WHERE country_id = ?");
+            ps.setInt(1, 230);
+            ResultSet rs = ps.executeQuery();
+            while (rs.next()) {
+                generalData.setId(rs.getInt("id"));
+                generalData.setRecovered(rs.getInt("recovered"));
+                generalData.setInfected(rs.getInt("infected"));
+                generalData.setCritical(rs.getInt("critical"));
+                generalData.setDeath(rs.getInt("death"));
+                generalData.setCountry_id(rs.getLong("country_id"));
+                generalData.setCity_id(rs.getLong("city_id"));
+                generalData.setCity(cityService.findCityById(rs.getLong("city_id")));
+                generalData.setCountry(countryService.findCountryById(rs.getLong("country_id")));
+                GeneralDataList.add(generalData);
+            }
+            con.close();
+        } catch (SQLException throwables) {
+            throwables.printStackTrace();
+        }
+        return GeneralDataList;
+    }
 }
