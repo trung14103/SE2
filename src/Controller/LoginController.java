@@ -1,6 +1,7 @@
 package Controller;
 
 import Service.UserService;
+import Service.UserServiceImpl;
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
@@ -11,6 +12,10 @@ import javax.servlet.annotation.WebServlet;
 @WebServlet(name = "LoginController", urlPatterns = "/login")
 public class LoginController extends HttpServlet {
     private UserService userService;
+
+    public void init() {
+        userService = new UserServiceImpl();
+    }
 
     protected void loginView(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         RequestDispatcher dispatcher = request.getRequestDispatcher("login.jsp");
@@ -31,8 +36,6 @@ public class LoginController extends HttpServlet {
     }
 
     protected void checkLogin(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        String command = request.getParameter("command");
-
         String username = request.getParameter("username");
         String password = request.getParameter("password");
         String url = "/login.jsp";
@@ -40,7 +43,7 @@ public class LoginController extends HttpServlet {
 
         if (username.isEmpty() && password.isEmpty()) {
             error = "Please fill in the necessary information";
-        } else if (userService.login(username, password) == false) {
+        } else if (!userService.login(username, password)) {
             error = "Username Or Password is valid";
         }
 
@@ -51,13 +54,12 @@ public class LoginController extends HttpServlet {
         try {
             if (error.length() == 0) {
                 HttpSession session = request.getSession();
-                session.setAttribute("username", username);
-                userService.login(username, password);
-                Cookie loginCookie = new Cookie("username", username);
-
-                loginCookie.setMaxAge(60*60);
-                response.addCookie(loginCookie);
-                response.sendRedirect("home.jsp");
+                String role = userService.findUserByName(username).getRole();
+                session.setAttribute("role", role );
+                if (role.equals("admin"))
+                {request.getRequestDispatcher("admin-index.jsp").forward(request, response);}
+                else
+                    request.getRequestDispatcher("statistic.jsp").forward(request, response);
             } else {
                 RequestDispatcher requestDispatcher = getServletContext().getRequestDispatcher(url);
                 requestDispatcher.forward(request, response);

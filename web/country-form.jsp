@@ -15,7 +15,11 @@
     <link rel="stylesheet" href="./assets/libs/css/style.css">
     <link rel="stylesheet" href="./assets/vendor/fonts/fontawesome/css/fontawesome-all.css">
 </head>
-
+<% //In case, if Admin session is not set, redirect to Login page
+    if((request.getSession(false).getAttribute("role") != "admin") )
+    {
+        response.sendRedirect("/login.jsp");
+    }%>
 <body>
     <!-- ============================================================== -->
     <!-- main wrapper -->

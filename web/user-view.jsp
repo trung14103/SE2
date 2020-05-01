@@ -18,7 +18,11 @@
     <link rel="stylesheet" type="text/css" href="./assets/vendor/datatables/css/select.bootstrap4.css">
     <link rel="stylesheet" type="text/css" href="./assets/vendor/datatables/css/fixedHeader.bootstrap4.css">
 </head>
-
+<% //In case, if Admin session is not set, redirect to Login page
+    if((request.getSession(false).getAttribute("role") != "admin") )
+    {
+        response.sendRedirect("/login.jsp");
+    }%>
 <body>
     <!-- ============================================================== -->
     <!-- main wrapper -->
