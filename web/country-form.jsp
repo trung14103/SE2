@@ -170,7 +170,7 @@ John Abraham</h5>
                                             </div>
                                         </li>
                                         <li class="nav-item">
-                                            <a class="nav-link active" href="#" data-toggle="collapse" aria-expanded="false"
+                                            <a class="nav-link" href="#" data-toggle="collapse" aria-expanded="false"
                                                data-target="#submenu-2" aria-controls="submenu-2"><i class="fa fa-fw fa-warehouse"></i>City,
                                                 Province </a>
                                             <div id="submenu-2" class="collapse submenu" style="">
@@ -179,13 +179,13 @@ John Abraham</h5>
                                                         <a class="nav-link" href="city?command=new">Add New Data</a>
                                                     </li>
                                                     <li class="nav-item">
-                                                        <a class="nav-link" href="city<?command=list">City, Province Datatable</a>
+                                                        <a class="nav-link" href="city?command=list">City, Province Datatable</a>
                                                     </li>
                                                 </ul>
                                             </div>
                                         </li>
                                         <li class="nav-item">
-                                            <a class="nav-link" href="#" data-toggle="collapse" aria-expanded="false"
+                                            <a class="nav-link active" href="#" data-toggle="collapse" aria-expanded="false"
                                                data-target="#submenu-3" aria-controls="submenu-3"><i class="fas fa-fw fa-chart-pie"></i>Country
                                             </a>
                                             <div id="submenu-3" class="collapse submenu" style="">
@@ -259,10 +259,10 @@ John Abraham</h5>
                         <div class="card">
                             <div class="card-body">
                                 <c:if test="${country != null}">
-                                    <form action="<%request.getServletPath();%> ?command=update" method="post" id="basicform" data-parsley-validate="">
+                                    <form action="<%request.getServletPath();%>?command=update" method="post" id="basicform" data-parsley-validate="">
                                 </c:if>
                                 <c:if test="${country == null}">
-                                    <form action="<%request.getServletPath();%> ?command=insert" method="post" id="basicform" data-parsley-validate="">
+                                    <form action="<%request.getServletPath();%>?command=insert" method="post" id="basicform" data-parsley-validate="">
                                 </c:if>
 
                                     <c:if test="${country != null}">

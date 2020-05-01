@@ -29,7 +29,7 @@
     <!-- ============================================================== -->
     <div class="dashboard-header">
         <nav class="navbar navbar-expand-lg bg-white fixed-top">
-            <a class="navbar-brand" href="admin-index.html">#COVID-19</a>
+            <a class="navbar-brand" href="#">#COVID-19</a>
             <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
                 <span class="navbar-toggler-icon"></span>
             </button>
@@ -182,7 +182,7 @@ John Abraham</span>is now following you
                                                     <a class="nav-link" href="city?command=new">Add New Data</a>
                                                 </li>
                                                 <li class="nav-item">
-                                                    <a class="nav-link" href="city<?command=list">City, Province Datatable</a>
+                                                    <a class="nav-link" href="city?command=list">City, Province Datatable</a>
                                                 </li>
                                             </ul>
                                         </div>

@@ -29,7 +29,7 @@
     <!-- ============================================================== -->
     <div class="dashboard-header">
         <nav class="navbar navbar-expand-lg bg-white fixed-top">
-            <a class="navbar-brand" href="admin-index.html">Concept</a>
+            <a class="navbar-brand" href="#">Concept</a>
             <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
                     aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
                 <span class="navbar-toggler-icon"></span>
@@ -201,7 +201,7 @@ John Abraham</span>is now following you
                                         </div>
                                     </li>
                                     <li class="nav-item">
-                                        <a class="nav-link active" href="#" data-toggle="collapse" aria-expanded="false"
+                                        <a class="nav-link" href="#" data-toggle="collapse" aria-expanded="false"
                                            data-target="#submenu-2" aria-controls="submenu-2"><i class="fa fa-fw fa-warehouse"></i>City,
                                             Province </a>
                                         <div id="submenu-2" class="collapse submenu" style="">
@@ -210,7 +210,7 @@ John Abraham</span>is now following you
                                                     <a class="nav-link" href="city?command=new">Add New Data</a>
                                                 </li>
                                                 <li class="nav-item">
-                                                    <a class="nav-link" href="city<?command=list">City, Province Datatable</a>
+                                                    <a class="nav-link" href="city?command=list">City, Province Datatable</a>
                                                 </li>
                                             </ul>
                                         </div>
@@ -231,7 +231,7 @@ John Abraham</span>is now following you
                                         </div>
                                     </li>
                                     <li class="nav-item ">
-                                        <a class="nav-link" href="#" data-toggle="collapse" aria-expanded="false"
+                                        <a class="nav-link active" href="#" data-toggle="collapse" aria-expanded="false"
                                            data-target="#submenu-4" aria-controls="submenu-4"><i class="fab fa-fw fa-wpforms"></i>Covid
                                             Data </a>
                                         <div id="submenu-4" class="collapse submenu" style="">

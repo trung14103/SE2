@@ -46,17 +46,20 @@
       </div>
   </nav>
   
-<div class="container-fluid">
-  <!-- Row 1 -->
-    <div class="row">
-        <div class="col">
-            <h2 class="header-box">ABOUT US</h2>
-            <p>Group 9 - Students from FIT, Faculty of Information Technology - HANU, Hanoi University.
-                <br> This is a project for SE2 course - Software Engineer 2.
-            </p>
-        </div>
-    </div>
-</div>
+  <div class="container-fluid">
+      <div class="row">
+          <div class="col">
+              <h2 class="header-box">ABOUT US</h2>
+          </div>
+      </div>
+  </div>
+  
+  <div class="container">
+    <br>
+    <p>Group 9 - Students from FIT, Faculty of Information Technology - HANU, Hanoi University.
+      <br> This is a project for SE2 course - Software Engineer 2.
+  </p>
+  </div>
     <div class="footer">
       Copyright &copy; 2020 by Supernho Corp.
     </div>

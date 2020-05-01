@@ -28,7 +28,7 @@
   <div class="container">
     <div class="row">
       <div class="col-md-7">
-        <img src="img/virus.png" class="login-img" alt="virus"/>
+        <img src="./assets/images/virus.png" class="login-img" alt="virus"/>
       </div>
       <div class="col-md-4">
         <form action="" method="POST">

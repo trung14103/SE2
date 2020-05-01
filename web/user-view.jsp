@@ -29,7 +29,7 @@
         <!-- ============================================================== -->
          <div class="dashboard-header">
             <nav class="navbar navbar-expand-lg bg-white fixed-top">
-                <a class="navbar-brand" href="admin-index.html">#COVID-19</a>
+                <a class="navbar-brand" href="#">#COVID-19</a>
                 <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
                     <span class="navbar-toggler-icon"></span>
                 </button>
@@ -157,7 +157,7 @@ John Abraham</h5>
                                             Dashboard
                                         </li>
                                         <li class="nav-item ">
-                                            <a class="nav-link" href="#" data-toggle="collapse" aria-expanded="false"
+                                            <a class="nav-link active" href="#" data-toggle="collapse" aria-expanded="false"
                                                data-target="#submenu-1" aria-controls="submenu-1"><i
                                                     class="fa fa-fw fa-user-circle"></i>User Management <span
                                                     class="badge badge-success">6</span></a>
@@ -173,7 +173,7 @@ John Abraham</h5>
                                             </div>
                                         </li>
                                         <li class="nav-item">
-                                            <a class="nav-link active" href="#" data-toggle="collapse" aria-expanded="false"
+                                            <a class="nav-link" href="#" data-toggle="collapse" aria-expanded="false"
                                                data-target="#submenu-2" aria-controls="submenu-2"><i class="fa fa-fw fa-warehouse"></i>City,
                                                 Province </a>
                                             <div id="submenu-2" class="collapse submenu" style="">
@@ -182,7 +182,7 @@ John Abraham</h5>
                                                         <a class="nav-link" href="city?command=new">Add New Data</a>
                                                     </li>
                                                     <li class="nav-item">
-                                                        <a class="nav-link" href="city<?command=list">City, Province Datatable</a>
+                                                        <a class="nav-link" href="city?command=list">City, Province Datatable</a>
                                                     </li>
                                                 </ul>
                                             </div>
