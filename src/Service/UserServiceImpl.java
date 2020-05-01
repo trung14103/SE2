@@ -23,7 +23,7 @@ public class UserServiceImpl implements UserService {
 
     private static String INSERT_USER = "INSERT INTO users ( username, password, email, address, role, created_date) VALUES (?, ?, ?, ?, ?, ?);";
 
-    private static String SELECT_USER_BY_NAME_PASSWORD = "SELECT * FROM users WHERE username = ?, password = ?;";
+    private static String SELECT_USER_BY_NAME_PASSWORD = "SELECT * FROM users WHERE username = ? AND password = ?;";
 
     @Override
 
@@ -122,20 +122,22 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
-    public boolean login(String username, String password) {
+    public String login(String username, String password) {
         Connection con = DBConnect.getConnection();
-        boolean isSuccess = false;
+        String role="";
         try {
             PreparedStatement ps = con.prepareStatement(SELECT_USER_BY_NAME_PASSWORD);
+            ps.setString(1, username);
+            ps.setString(2, password);
             ResultSet rs = ps.executeQuery();
-            if (rs.next()) {
-                con.close();
-                isSuccess = true;
+            while (rs.next()) {
+                role = rs.getString("role");
             }
+            con.close();
         } catch (SQLException e) {
             e.printStackTrace();
         }
-        return isSuccess;
+        return role;
     }
 
     @Override

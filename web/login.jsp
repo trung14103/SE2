@@ -33,7 +33,7 @@
         </div>
         <div class="col-md-4">
 
-            <form action="<%request.getServletPath();%>/login?command=check"  method="POST">
+            <form action="<%request.getServletPath();%> ?command=check" method="post" id="basicform" data-parsley-validate="">
             <h1 class="login-header">Login</h1>
             <div class="input-container">
                 <i class="fas fa-user" aria-hidden="true"></i>

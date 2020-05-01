@@ -1,5 +1,6 @@
 package Controller;
 
+import Model.User;
 import Service.UserService;
 import Service.UserServiceImpl;
 
@@ -22,7 +23,11 @@ public class LoginController extends HttpServlet {
         dispatcher.forward(request, response);
     }
 
-    protected  void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+    protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+        doGet(request, response);
+    }
+
+    protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         String command = request.getParameter("command");
 
         switch (command) {
@@ -40,10 +45,11 @@ public class LoginController extends HttpServlet {
         String password = request.getParameter("password");
         String url = "/login.jsp";
         String error = "";
+        String role = userService.login(username, password);
 
         if (username.isEmpty() && password.isEmpty()) {
             error = "Please fill in the necessary information";
-        } else if (!userService.login(username, password)) {
+        } else if (role.equals("")) {
             error = "Username Or Password is valid";
         }
 
@@ -54,19 +60,17 @@ public class LoginController extends HttpServlet {
         try {
             if (error.length() == 0) {
                 HttpSession session = request.getSession();
-                String role = userService.findUserByName(username).getRole();
-                session.setAttribute("role", role );
-                if (role.equals("admin"))
-                {request.getRequestDispatcher("admin-index.jsp").forward(request, response);}
-                else
-                    request.getRequestDispatcher("statistic.jsp").forward(request, response);
+                session.setAttribute("role", role);
+                session.setMaxInactiveInterval(10*60);
+                RequestDispatcher requestDispatcher = request.getRequestDispatcher("statistics.jsp");
+                System.out.println(request.getSession().getAttribute("role"));
+                requestDispatcher.forward(request, response);
             } else {
                 RequestDispatcher requestDispatcher = getServletContext().getRequestDispatcher(url);
                 requestDispatcher.forward(request, response);
             }
         } catch (Exception e) {
             e.printStackTrace();
-            response.sendRedirect("/login.jsp");
         }
     }
 }
