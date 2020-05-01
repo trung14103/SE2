@@ -143,72 +143,82 @@ John Abraham</h5>
         <div class="nav-left-sidebar sidebar-dark">
             <div class="menu-list">
                 <nav class="navbar navbar-expand-lg navbar-light">
-                    <a class="d-xl-none d-lg-none" href="#">Dashboard</a>
-                    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
-                        <span class="navbar-toggler-icon"></span>
-                    </button>
-                    <div class="collapse navbar-collapse" id="navbarNav">
-                        <ul class="navbar-nav flex-column">
-                            <li class="nav-divider">
-                                Dashboard
-                            </li>
-                            <li class="nav-item ">
-                                <a class="nav-link" href="#" data-toggle="collapse" aria-expanded="false" data-target="#submenu-1" aria-controls="submenu-1"><i class="fa fa-fw fa-user-circle"></i>User Management <span class="badge badge-success">6</span></a>
-                                <div id="submenu-1" class="collapse submenu" style="">
-                                    <ul class="nav flex-column">        
-                                        <li class="nav-item">
-                                            <a class="nav-link" href="user-form.html">Create New User</a>
+                                <a class="d-xl-none d-lg-none" href="#">Dashboard</a>
+                                <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav"
+                                        aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+                                    <span class="navbar-toggler-icon"></span>
+                                </button>
+                                <div class="collapse navbar-collapse" id="navbarNav">
+                                    <ul class="navbar-nav flex-column">
+                                        <li class="nav-divider">
+                                            Dashboard
+                                        </li>
+                                        <li class="nav-item ">
+                                            <a class="nav-link" href="#" data-toggle="collapse" aria-expanded="false"
+                                               data-target="#submenu-1" aria-controls="submenu-1"><i
+                                                    class="fa fa-fw fa-user-circle"></i>User Management <span
+                                                    class="badge badge-success">6</span></a>
+                                            <div id="submenu-1" class="collapse submenu" style="">
+                                                <ul class="nav flex-column">
+                                                    <li class="nav-item">
+                                                        <a class="nav-link" href="user?command=new">Create New User</a>
+                                                    </li>
+                                                    <li class="nav-item">
+                                                        <a class="nav-link" href="user?command=list">User Datatable</a>
+                                                    </li>
+                                                </ul>
+                                            </div>
                                         </li>
                                         <li class="nav-item">
-                                            <a class="nav-link" href="user-view.html">User Datatable</a>
-                                        </li>
-                                    </ul>
-                                </div>
-                            </li>
-                            <li class="nav-item">
-                                <a class="nav-link" href="#" data-toggle="collapse" aria-expanded="false" data-target="#submenu-2" aria-controls="submenu-2"><i class="fa fa-fw fa-warehouse"></i>City, Province </a>
-                                <div id="submenu-2" class="collapse submenu" style="">
-                                    <ul class="nav flex-column">
-                                        <li class="nav-item">
-                                            <a class="nav-link" href="city-form.html">Add New Data</a>
-                                        </li>
-                                        <li class="nav-item">
-                                            <a class="nav-link" href="city-view.html">City, Province Datatable</a>
-                                        </li>
-                                    </ul>
-                                </div>
-                            </li>
-                            <li class="nav-item">
-                                <a class="nav-link active" href="#" data-toggle="collapse" aria-expanded="false" data-target="#submenu-3" aria-controls="submenu-3"><i class="fas fa-fw fa-chart-pie"></i>Country </a>
-                                <div id="submenu-3" class="collapse submenu" style="">
-                                    <ul class="nav flex-column">
-                                        <li class="nav-item">
-                                            <a class="nav-link" href="country-form.html">Add New Country Data</a>
+                                            <a class="nav-link active" href="#" data-toggle="collapse" aria-expanded="false"
+                                               data-target="#submenu-2" aria-controls="submenu-2"><i class="fa fa-fw fa-warehouse"></i>City,
+                                                Province </a>
+                                            <div id="submenu-2" class="collapse submenu" style="">
+                                                <ul class="nav flex-column">
+                                                    <li class="nav-item">
+                                                        <a class="nav-link" href="city?command=new">Add New Data</a>
+                                                    </li>
+                                                    <li class="nav-item">
+                                                        <a class="nav-link" href="city<?command=list">City, Province Datatable</a>
+                                                    </li>
+                                                </ul>
+                                            </div>
                                         </li>
                                         <li class="nav-item">
-                                            <a class="nav-link" href="country-view.html">Country Datatable</a>
-                                        </li>                 
-                                    </ul>
-                                </div>
-                            </li>
-                            <li class="nav-item ">
-                                <a class="nav-link" href="#" data-toggle="collapse" aria-expanded="false" data-target="#submenu-4" aria-controls="submenu-4"><i class="fab fa-fw fa-wpforms"></i>Covid Data </a>
-                                <div id="submenu-4" class="collapse submenu" style="">
-                                    <ul class="nav flex-column">
-                                        <li class="nav-item">
-                                            <a class="nav-link" href="covid-data-form.html">Add New Data</a>
+                                            <a class="nav-link" href="#" data-toggle="collapse" aria-expanded="false"
+                                               data-target="#submenu-3" aria-controls="submenu-3"><i class="fas fa-fw fa-chart-pie"></i>Country
+                                            </a>
+                                            <div id="submenu-3" class="collapse submenu" style="">
+                                                <ul class="nav flex-column">
+                                                    <li class="nav-item">
+                                                        <a class="nav-link" href="country?command=new">Add New Country Data</a>
+                                                    </li>
+                                                    <li class="nav-item">
+                                                        <a class="nav-link" href="country?command=list">Country Datatable</a>
+                                                    </li>
+                                                </ul>
+                                            </div>
                                         </li>
-                                        <li class="nav-item">
-                                            <a class="nav-link" href="covid-data-view.html">Covid Cases Datatable</a>
+                                        <li class="nav-item ">
+                                            <a class="nav-link" href="#" data-toggle="collapse" aria-expanded="false"
+                                               data-target="#submenu-4" aria-controls="submenu-4"><i class="fab fa-fw fa-wpforms"></i>Covid
+                                                Data </a>
+                                            <div id="submenu-4" class="collapse submenu" style="">
+                                                <ul class="nav flex-column">
+                                                    <li class="nav-item">
+                                                        <a class="nav-link" href="generalData?command=new">Add New Data</a>
+                                                    </li>
+                                                    <li class="nav-item">
+                                                        <a class="nav-link" href="generalData?command=list">Covid Cases Datatable</a>
+                                                    </li>
+
+                                                </ul>
+                                            </div>
                                         </li>
 
                                     </ul>
                                 </div>
-                            </li>
-                            
-                        </ul>
-                    </div>
-                </nav>
+                            </nav>
             </div>
         </div>
         <!-- ============================================================== -->
@@ -247,32 +257,28 @@ John Abraham</h5>
                     <!-- ============================================================== -->
                     <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12">
                         <div class="card">
-                            <h5 class="card-header">
-                                <c:if test="${countries == null"}>Add New Record Form</c:if>
-                                <c:if test="${countries != null"}>Update Form</c:if>
-                            </h5>
                             <div class="card-body">
-                                <c:if test="${countries != null}">
-                                    <form action="update" method="post" id="basicform" data-parsley-validate="">
+                                <c:if test="${country != null}">
+                                    <form action="<%request.getServletPath();%> ?command=update" method="post" id="basicform" data-parsley-validate="">
                                 </c:if>
-                                <c:if test="${countries == null}">
-                                    <form action="insert" method="post" id="basicform" data-parsley-validate="">
+                                <c:if test="${country == null}">
+                                    <form action="<%request.getServletPath();%> ?command=insert" method="post" id="basicform" data-parsley-validate="">
                                 </c:if>
 
-                                    <c:if test="${countries != null}">
-                                        <input type="hidden" name="id" value="<c:out value='${countries.id}' />" />
+                                    <c:if test="${country != null}">
+                                        <input type="hidden" name="id" value="<c:out value='${country.id}' />" />
                                     </c:if>
 
-                                        <input type="hidden" name="userName">
+                                        <input type="hidden" name="oldCountryName">
 
                                     <div class="form-group">
                                         <label for="inputName">Country Name</label>
-                                        <input id="inputName" type="text" name="countries.name" value="<c:out value='${countries.name}' />" data-parsley-trigger="change" required="" placeholder="Country Name" autocomplete="off" class="form-control">
-                                        <label id="err"></label>
+                                        <input id="inputName" type="text" name="name" value="<c:out value='${country.name}' />" data-parsley-trigger="change" required="" placeholder="Country Name" autocomplete="off" class="form-control">
+                                        <label id="name_err"></label>
                                     </div>
                                     <div class="form-group">
                                         <label for="inputContinent">Continent</label>
-                                        <input id="inputContinent" type="text" name="countries.continent" data-parsley-trigger="change" required="" value="<c:out value='${countries.continent}' />"  placeholder="Continent" autocomplete="off" class="form-control">
+                                        <input id="inputContinent" type="text" name="continent" data-parsley-trigger="change" required="" value="<c:out value='${country.continent}' />"  placeholder="Continent" autocomplete="off" class="form-control">
                                         <label id="err"></label>
                                     </div>
 
@@ -343,6 +349,8 @@ John Abraham</h5>
         }, false);
     })();
     </script>
+        </div>
+    </div>
 </body>
  
 </html>

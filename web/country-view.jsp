@@ -13,10 +13,10 @@
     <link href="./assets/vendor/fonts/circular-std/style.css" rel="stylesheet">
     <link rel="stylesheet" href="./assets/libs/css/style.css">
     <link rel="stylesheet" href="./assets/vendor/fonts/fontawesome/css/fontawesome-all.css">
-    <link rel="stylesheet" type="text/css" href="./assets/vendor/datatables/css/dataTables.bootstrap4.css">
-    <link rel="stylesheet" type="text/css" href="./assets/vendor/datatables/css/buttons.bootstrap4.css">
-    <link rel="stylesheet" type="text/css" href="./assets/vendor/datatables/css/select.bootstrap4.css">
-    <link rel="stylesheet" type="text/css" href="./assets/vendor/datatables/css/fixedHeader.bootstrap4.css">
+    <link rel="stylesheet" href="./assets/vendor/datatables/css/dataTables.bootstrap4.css">
+    <link rel="stylesheet" href="./assets/vendor/datatables/css/buttons.bootstrap4.css">
+    <link rel="stylesheet" href="./assets/vendor/datatables/css/select.bootstrap4.css">
+    <link rel="stylesheet" href="./assets/vendor/datatables/css/fixedHeader.bootstrap4.css">
 </head>
 
 <body>
@@ -146,72 +146,82 @@ John Abraham</h5>
        <div class="nav-left-sidebar sidebar-dark">
             <div class="menu-list">
                 <nav class="navbar navbar-expand-lg navbar-light">
-                    <a class="d-xl-none d-lg-none" href="#">Dashboard</a>
-                    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
-                        <span class="navbar-toggler-icon"></span>
-                    </button>
-                    <div class="collapse navbar-collapse" id="navbarNav">
-                        <ul class="navbar-nav flex-column">
-                            <li class="nav-divider">
-                                Dashboard
-                            </li>
-                            <li class="nav-item ">
-                                <a class="nav-link" href="#" data-toggle="collapse" aria-expanded="false" data-target="#submenu-1" aria-controls="submenu-1"><i class="fa fa-fw fa-user-circle"></i>User Management <span class="badge badge-success">6</span></a>
-                                <div id="submenu-1" class="collapse submenu" style="">
-                                    <ul class="nav flex-column">        
-                                        <li class="nav-item">
-                                            <a class="nav-link" href="user-form.html">Create New User</a>
+                                <a class="d-xl-none d-lg-none" href="#">Dashboard</a>
+                                <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav"
+                                        aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+                                    <span class="navbar-toggler-icon"></span>
+                                </button>
+                                <div class="collapse navbar-collapse" id="navbarNav">
+                                    <ul class="navbar-nav flex-column">
+                                        <li class="nav-divider">
+                                            Dashboard
+                                        </li>
+                                        <li class="nav-item ">
+                                            <a class="nav-link" href="#" data-toggle="collapse" aria-expanded="false"
+                                               data-target="#submenu-1" aria-controls="submenu-1"><i
+                                                    class="fa fa-fw fa-user-circle"></i>User Management <span
+                                                    class="badge badge-success">6</span></a>
+                                            <div id="submenu-1" class="collapse submenu" style="">
+                                                <ul class="nav flex-column">
+                                                    <li class="nav-item">
+                                                        <a class="nav-link" href="user?command=new">Create New User</a>
+                                                    </li>
+                                                    <li class="nav-item">
+                                                        <a class="nav-link" href="user?command=list">User Datatable</a>
+                                                    </li>
+                                                </ul>
+                                            </div>
                                         </li>
                                         <li class="nav-item">
-                                            <a class="nav-link" href="user-view.html">User Datatable</a>
-                                        </li>
-                                    </ul>
-                                </div>
-                            </li>
-                            <li class="nav-item">
-                                <a class="nav-link" href="#" data-toggle="collapse" aria-expanded="false" data-target="#submenu-2" aria-controls="submenu-2"><i class="fa fa-fw fa-warehouse"></i>City, Province</a>
-                                <div id="submenu-2" class="collapse submenu" style="">
-                                    <ul class="nav flex-column">
-                                        <li class="nav-item">
-                                            <a class="nav-link" href="city-form.html">Add New Data</a>
-                                        </li>
-                                        <li class="nav-item">
-                                            <a class="nav-link" href="city-view.html">City, Province Datatable</a>
-                                        </li>
-                                    </ul>
-                                </div>
-                            </li>
-                            <li class="nav-item">
-                                <a class="nav-link active" href="#" data-toggle="collapse" aria-expanded="false" data-target="#submenu-3" aria-controls="submenu-3"><i class="fas fa-fw fa-chart-pie"></i>Country</a>
-                                <div id="submenu-3" class="collapse submenu" style="">
-                                    <ul class="nav flex-column">
-                                        <li class="nav-item">
-                                            <a class="nav-link" href="country-form.html">Add New Country Data</a>
+                                            <a class="nav-link active" href="#" data-toggle="collapse" aria-expanded="false"
+                                               data-target="#submenu-2" aria-controls="submenu-2"><i class="fa fa-fw fa-warehouse"></i>City,
+                                                Province </a>
+                                            <div id="submenu-2" class="collapse submenu" style="">
+                                                <ul class="nav flex-column">
+                                                    <li class="nav-item">
+                                                        <a class="nav-link" href="city?command=new">Add New Data</a>
+                                                    </li>
+                                                    <li class="nav-item">
+                                                        <a class="nav-link" href="city<?command=list">City, Province Datatable</a>
+                                                    </li>
+                                                </ul>
+                                            </div>
                                         </li>
                                         <li class="nav-item">
-                                            <a class="nav-link" href="country-view.html">Country Datatable</a>
-                                        </li>                 
-                                    </ul>
-                                </div>
-                            </li>
-                            <li class="nav-item ">
-                                <a class="nav-link" href="#" data-toggle="collapse" aria-expanded="false" data-target="#submenu-4" aria-controls="submenu-4"><i class="fab fa-fw fa-wpforms"></i>Covid Data </a>
-                                <div id="submenu-4" class="collapse submenu" style="">
-                                    <ul class="nav flex-column">
-                                        <li class="nav-item">
-                                            <a class="nav-link" href="covid-data-form.html">Add New Data</a>
+                                            <a class="nav-link" href="#" data-toggle="collapse" aria-expanded="false"
+                                               data-target="#submenu-3" aria-controls="submenu-3"><i class="fas fa-fw fa-chart-pie"></i>Country
+                                            </a>
+                                            <div id="submenu-3" class="collapse submenu" style="">
+                                                <ul class="nav flex-column">
+                                                    <li class="nav-item">
+                                                        <a class="nav-link" href="country?command=new">Add New Country Data</a>
+                                                    </li>
+                                                    <li class="nav-item">
+                                                        <a class="nav-link" href="country?command=list">Country Datatable</a>
+                                                    </li>
+                                                </ul>
+                                            </div>
                                         </li>
-                                        <li class="nav-item">
-                                            <a class="nav-link" href="covid-data-view.html">Covid Cases Datatable</a>
+                                        <li class="nav-item ">
+                                            <a class="nav-link" href="#" data-toggle="collapse" aria-expanded="false"
+                                               data-target="#submenu-4" aria-controls="submenu-4"><i class="fab fa-fw fa-wpforms"></i>Covid
+                                                Data </a>
+                                            <div id="submenu-4" class="collapse submenu" style="">
+                                                <ul class="nav flex-column">
+                                                    <li class="nav-item">
+                                                        <a class="nav-link" href="generalData?command=new">Add New Data</a>
+                                                    </li>
+                                                    <li class="nav-item">
+                                                        <a class="nav-link" href="generalData?command=list">Covid Cases Datatable</a>
+                                                    </li>
+
+                                                </ul>
+                                            </div>
                                         </li>
 
                                     </ul>
                                 </div>
-                            </li>
-                            
-                        </ul>
-                    </div>
-                </nav>
+                            </nav>
             </div>
         </div>
         <!-- ============================================================== -->
@@ -260,69 +270,22 @@ John Abraham</h5>
                                                 <th>Country</th>
                                                 <th>Updated Date</th>
                                                 <th>Continent</th>
+                                                <th width="30%">Actions</th>
                                             </tr>
                                         </thead>
                                         <tbody>
+                                        <c:forEach var="country" items="${listCountry}">
                                             <tr>
-                                                <td>1</td>
-                                                <td>USA</td>
-                                                <td>27/04/2020</td>
-                                                <td>North America</td>
+                                                <td><c:out value="${country.id}"/></td>
+                                                <td><c:out value="${country.name}"/></td>
+                                                <td><c:out value="${country.updated_day}"/></td>
+                                                <td><c:out value="${country.continent}"/></td>
+                                                <td><a class="btn btn-info" href=<%request.getServletPath();%>"?command=edit&id=<c:out value='${country.id}'/>">Edit</a>
+                       							 &nbsp;&nbsp;&nbsp;&nbsp; 
+                       							 <a class="btn btn-danger" href=<%request.getServletPath();%>"?command=delete&id=<c:out value='${country.id}'/>">Delete</a>
+                    							</td>
                                             </tr>
-                                            <tr>
-                                                <td>2</td>
-                                                <td>Spain</td>
-                                                <td>27/04/2020</td>
-                                                <td>Europe</td>
-                                            </tr>
-                                            <tr>
-                                                <td>3</td>
-                                                <td>Italy</td>
-                                                <td>27/04/2020</td>
-                                                <td>Europe</td>
-                                            </tr>
-                                            <tr>
-                                                <td>4</td>
-                                                <td>France</td>
-                                                <td>26/04/2020</td>
-                                                <td>Europe</td>
-                                            </tr>
-                                            <tr>
-                                                <td>5</td>
-                                                <td>Germany</td>
-                                                <td>27/04/2020</td>
-                                                <td>Europe</td>
-                                            </tr>
-                                            <tr>
-                                                <td>6</td>
-                                                <td>UK</td>
-                                                <td>26/04/2020</td>
-                                                <td>Europe</td>
-                                            </tr>
-                                            <tr>
-                                                <td>7</td>
-                                                <td>Turkey</td>
-                                                <td>27/04/2020</td>
-                                                <td>Europe</td>
-                                            </tr>
-                                            <tr>
-                                                <td>8</td>
-                                                <td>Iran</td>
-                                                <td>27/04/2020</td>
-                                                <td>Asia</td>
-                                            </tr>
-                                            <tr>
-                                                <td>9</td>
-                                                <td>Russia</td>
-                                                <td>27/04/2020</td>
-                                                <td>Europe</td>
-                                            </tr>
-                                            <tr>
-                                                <td>10</td>
-                                                <td>China</td>
-                                                <td>27/04/2020</td>
-                                                <td>Asia</td>
-                                            </tr>
+                                        </c:forEach>                                           
                                         </tbody>
                                         <tfoot>
                                             <tr>
@@ -330,6 +293,7 @@ John Abraham</h5>
                                                 <th>Country</th>
                                                 <th>Updated Date</th>
                                                 <th>Continent</th>
+                                                <th width="30%">Actions</th>
                                             </tr>
                                         </tfoot>
                                     </table>

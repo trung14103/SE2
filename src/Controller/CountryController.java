@@ -2,6 +2,7 @@ package Controller;
 
 import Model.Country;
 import Service.CountryService;
+import Service.CountryServiceImpl;
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
@@ -22,12 +23,13 @@ public class CountryController extends HttpServlet {
     private static final String dateFormat = "yyyy-MM-dd";
 
     private CountryService countryService;
-
-    public CountryController() {
-        super();
-    }
+	public void init() {
+		countryService = new CountryServiceImpl();
+ 	}
 
     protected void doGet(HttpServletRequest req, HttpServletResponse res) throws ServletException, IOException {
+        req.setCharacterEncoding("utf-8");
+        res.setCharacterEncoding("utf-8");
         String command = req.getParameter("command");
         try {
             switch (command) {
@@ -59,7 +61,7 @@ public class CountryController extends HttpServlet {
             throws SQLException, IOException, ServletException {
         List<Country> listCountry = countryService.findAll();
         request.setAttribute("listCountry", listCountry);
-        RequestDispatcher dispatcher = request.getRequestDispatcher("/country-list.jsp");
+        RequestDispatcher dispatcher = request.getRequestDispatcher("/country-view.jsp");
         dispatcher.forward(request, response);
     }
 
@@ -86,7 +88,7 @@ public class CountryController extends HttpServlet {
 
         if (countryService.checkExistCountry(name, null)) {
             country.setName(request.getParameter("name"));
-            country.setUpdated_day(convertToDate(request.getParameter("updated_day")));
+            country.setUpdated_day(new Date());
             country.setContinent(request.getParameter("continent"));
             countryService.createCountry(country);
             response.sendRedirect(request.getServletPath() + "?command=list");
@@ -99,9 +101,9 @@ public class CountryController extends HttpServlet {
 
     private void updateCountry(HttpServletRequest request, HttpServletResponse response)
             throws SQLException, IOException {
-        Country country = new Country();
         request.setCharacterEncoding("utf-8");
         response.setCharacterEncoding("utf-8");
+        Country country = new Country();
         String name = request.getParameter("name");
         String continent = request.getParameter("continent");
 
@@ -120,7 +122,7 @@ public class CountryController extends HttpServlet {
         try {
             if (err.length() == 0) {
                 country.setName(request.getParameter("name"));
-                country.setUpdated_day(convertToDate(request.getParameter("updated_day")));
+                country.setUpdated_day(new Date());
                 country.setContinent(request.getParameter("continent"));
                 country.setId(Long.parseLong(request.getParameter("id")));
 
@@ -146,16 +148,6 @@ public class CountryController extends HttpServlet {
 
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         doGet(request, response);
-    }
-
-    private static Date convertToDate(String dateString) {
-        Date date = null;
-        try {
-            date = new SimpleDateFormat(dateFormat).parse(dateString);
-        } catch (ParseException e) {
-            e.printStackTrace();
-        }
-        return date;
     }
 }
 

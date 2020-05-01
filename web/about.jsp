@@ -26,27 +26,25 @@
     <script src='./assets/libs/js/main.js' defer></script>
 </head>
 <body>
-  <nav class="navbar navbar-expand-md bg-dark navbar-dark"> 
-    <!--button sidenav-->
-    <button class="bg-dark" type="button" onclick="openNav()">
-      <span class="navbar-toggler-icon"></span>
-    </button>
-    <!--Navbar items-->
-   <div class="collapse navbar-collapse" id="collapsibleNavbar">
-      <ul class="navbar-nav ml-auto">
-        <li class="nav-item">
-          <a class="nav-link" href="#">Sign In</a>
-        </li>
-      </ul>
-    </div>
+  <nav class="navbar navbar-expand-lg bg-light navbar-white">
+
+      <!--Navbar items-->
+      <div class="collapse navbar-collapse" id="collapsibleNavbar">
+          <ul class="navbar-nav mr-auto">
+              <li class="nav-item">
+                  <a class="nav-link" href="/">Home</a>
+              </li>
+              <li class="nav-item active">
+                  <a class="nav-link" href="#">About</a>
+              </li>
+          </ul>
+          <ul class="navbar-nav ml-auto">
+              <li class="nav-item">
+                  <a class="nav-link" href="#">Sign In</a>
+              </li>
+          </ul>
+      </div>
   </nav>
-  <!--Sidenav-->
-  <div id="mySidenav" class="sidenav">
-    <a href="javascript:void(0)" class="closebtn" onclick="closeNav()">&times;</a>
-    <a href="#">Home</a>
-    <a href="#" class="active">About</a>
-    <a href="#">Contact</a>
-  </div>
   
 <div class="container-fluid">
   <!-- Row 1 -->
