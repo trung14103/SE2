@@ -17,7 +17,7 @@ public class CountryServiceImpl implements CountryService {
 
     private static String DELETE_COUNTRY_BY_ID = "DELETE FROM countries WHERE id = ?;";
 
-    private static String UPDATE_COUNTRY_BY_ID = "UPDATE countries SET name = ?, updated_day = ?, continent = ?;";
+    private static String UPDATE_COUNTRY_BY_ID = "UPDATE countries SET name = ?, updated_day = ?, continent = ? WHERE id = ?;";
 
     private static String INSERT_COUNTRY = "INSERT INTO countries ( name, updated_day, continent) VALUES (?, ?, ?);";
 
@@ -55,6 +55,7 @@ public class CountryServiceImpl implements CountryService {
             ps.setString(1, country.getName());
             ps.setDate(2, convertDate(country.getUpdated_day()));
             ps.setString(3, country.getContinent());
+            ps.setLong(4, country.getId());
             ps.executeUpdate();
             con.close();
         } catch (SQLException throwables) {
@@ -138,7 +139,7 @@ public class CountryServiceImpl implements CountryService {
             if (oldCountryName == null) {
                 return flagUser.getId() == null;
             } else {
-                return countryName.equals(oldCountryName) || flagUser.getId()  == null;
+                return countryName.equals(oldCountryName) || flagUser.getName()  == null;
             }
         }
         return true;

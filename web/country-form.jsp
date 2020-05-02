@@ -72,14 +72,16 @@
 
                                     <c:if test="${country != null}">
                                         <input type="hidden" name="id" value="<c:out value='${country.id}' />" />
+                                        <input type="hidden" name="oldCountryName" value="<c:out value='${country.name}' />">
                                     </c:if>
-
-                                        <input type="hidden" name="oldCountryName">
 
                                     <div class="form-group">
                                         <label for="inputName">Country Name</label>
                                         <input id="inputName" type="text" name="name" value="<c:out value='${country.name}' />" data-parsley-trigger="change" required="" placeholder="Country Name" autocomplete="off" class="form-control">
                                         <label id="name_err"></label>
+                                        <c:if test="${error!= null}">
+                                            <li style="color: red"><%=request.getAttribute("error")%></li>
+                                        </c:if>
                                     </div>
                                     <div class="form-group">
                                         <label for="inputContinent">Continent</label>

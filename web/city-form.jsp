@@ -85,6 +85,9 @@
                                     <c:if test="${city != null}">
                                         <input type="hidden" name="id" value="<c:out value='${city.id}' />"/>
                                         <input type="hidden" name="oldCityName" value="<c:out value='${city.name}' />"/>
+                                        <input id="inputCountryID" type="hidden" name="countryId"
+                                               placeholder="Country Name" required=""
+                                               value="<c:out value='${city.countryId}' />" class="form-control">
                                     </c:if>
 
                                     <div class="form-group">
@@ -93,16 +96,19 @@
                                                value="<c:out value='${city.name}' />" data-parsley-trigger="change"
                                                placeholder="City, Province Name" autocomplete="off"
                                                class="form-control">
-                                        <c:if test="${error!= null}">
-                                            <li style="color: red"><%=request.getAttribute("error")%></li>
+                                        <c:if test="${errorCity!= null && errorCity != ''}">
+                                            <li style="color: red"><%=request.getAttribute("errorCity")%></li>
                                         </c:if>
                                     </div>
                                     <div class="form-group">
                                         <label for="inputCountryID">Country ID</label>
-                                        <input id="inputCountryID" type="number" name="countryId"
-                                               placeholder="Country ID" required=""
-                                               value="<c:out value='${city.countryId}' />" class="form-control">
+                                        <input id="inputCountryID" type="text" name="countryName"
+                                               placeholder="Country Name" required=""
+                                               value="<c:out value='${city.getCountry().name}' />" class="form-control">
                                         <label id="err"></label>
+                                        <c:if test="${errorCountry!= null && errorCountry != ''}">
+                                            <li style="color: red"><%=request.getAttribute("errorCountry")%></li>
+                                        </c:if>
                                     </div>
 
                                     <div class="row">

@@ -58,7 +58,6 @@ public class LoginController extends HttpServlet {
                 session.setAttribute("role", role);
                 session.setAttribute("username", username);
                 RequestDispatcher requestDispatcher = request.getRequestDispatcher("statistics.jsp");
-                System.out.println(request.getSession().getAttribute("role"));
                 requestDispatcher.forward(request, response);
             } else {
                 request.setAttribute("error", error);

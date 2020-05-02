@@ -40,20 +40,20 @@
         </ul>
         <ul class="navbar-nav ml-auto">
             <li class="nav-item">
-                <c:if test="${role == null }">
+                <c:if test="${username == null }">
                     <ul class="navbar-nav ml-auto">
                         <li class="nav-item">
                             <a class="nav-link" href="login?command=view">Sign In</a>
                         </li>
                     </ul>
                 </c:if>
-                <c:if test="${role == 'admin'}">
-                    <ul class="navbar-nav ml-auto">
-                        <li class="nav-item">
-                            <a class="nav-link" href="user?command=view">Admin Page</a>
-                        </li>
-                    </ul>
-                </c:if>
+<%--                <c:if test="${username != null}">--%>
+<%--                    <ul class="navbar-nav ml-auto">--%>
+<%--                        <li class="nav-item">--%>
+<%--                            <a class="nav-link" href="user?command=view">Admin Page</a>--%>
+<%--                        </li>--%>
+<%--                    </ul>--%>
+<%--                </c:if>--%>
             </li>
         </ul>
     </div>

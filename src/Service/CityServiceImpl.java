@@ -1,7 +1,6 @@
 package Service;
 
 import Model.City;
-import Model.Country;
 import Utils.DBConnect;
 
 import java.sql.Connection;
@@ -20,7 +19,7 @@ public class CityServiceImpl implements CityService {
 
     private static String DELETE_CITY_BY_ID = "DELETE FROM cities WHERE id = ?;";
 
-    private static String UPDATE_CITY_BY_ID = "UPDATE cities SET name = ?, country_id = ?;";
+    private static String UPDATE_CITY_BY_ID = "UPDATE cities SET name = ?, country_id = ? WHERE id = ?;";
 
     private static String INSERT_CITY = "INSERT INTO cities (name, country_id) VALUES (?, ?);";
 
@@ -59,6 +58,7 @@ public class CityServiceImpl implements CityService {
             PreparedStatement ps = con.prepareStatement(UPDATE_CITY_BY_ID);
             ps.setString(1, city.getName());
             ps.setLong(2, city.getCountryId());
+            ps.setLong(3, city.getId());
             ps.executeUpdate();
             con.close();
         } catch (SQLException throwables) {
