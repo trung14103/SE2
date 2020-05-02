@@ -9,17 +9,15 @@ body {
 }
 
 .container-fluid {
-    background: #343a40;
+    background: #141414;
     padding: 20px;
 }
-
 
 .flag {
     display: block;
     margin-left: auto;
     margin-right: auto;
     width: 15%;
-    margin-bottom: 10px;
 }
 
 .header-box {
@@ -42,7 +40,7 @@ body {
 }
 
 .cases {
-    color: #fdfdfe;
+    color: gray;
 }
 
 .deaths {
@@ -61,6 +59,7 @@ body {
     background-color: #777;
     color: white;
     text-align: center;
+    padding: 10px;
 }
 
 .table-fixed {

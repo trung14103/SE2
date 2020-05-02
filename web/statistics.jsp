@@ -32,23 +32,38 @@
     <div class="collapse navbar-collapse" id="collapsibleNavbar">
         <ul class="navbar-nav mr-auto">
             <li class="nav-item active">
-                <a class="nav-link" href="/">Home</a>
+                <a class="nav-link" href="">Home</a>
+            </li>
+            <li class="nav-item ">
+                <a class="nav-link" href="world">World</a>
+            </li>
+            <li class="nav-item ">
+                <a class="nav-link" href="continent">Continent</a>
             </li>
             <li class="nav-item">
-                <a class="nav-link" href="#">About</a>
+                <a class="nav-link" href="about">About</a>
             </li>
         </ul>
-        <ul class="navbar-nav ml-auto">
-            <li class="nav-item">
-                <a class="nav-link" href="/login?command=view">Sign In</a>
-            </li>
-        </ul>
+       <!-- <c:if test="${role == null }"> -->
+            <ul class="navbar-nav ml-auto">
+                <li class="nav-item">
+                    <a class="nav-link" href="login?command=view">Sign In</a>
+                </li>
+            </ul>
+        <!-- </c:if> -->
+       <!-- <c:if test="${role == 'admin'}">
+            <ul class="navbar-nav ml-auto">
+                <li class="nav-item">
+                    <a class="nav-link" href="user?command=view">Admin Page</a>
+                </li>
+            </ul>
+        </c:if> -->
     </div>
 </nav>
 
 <div class="container-fluid">
     <!-- Row 1 -->
-    <div class="row top">
+    <div class="row">
         <div class="col">
             <h2 class="header-box">GLOBAL</h2>
             <img src="./assets/images/unflag.gif" class="flag" alt="global"/>
@@ -98,7 +113,6 @@
 <div class="container">
     <div class="row">
         <div class="col">
-		<br>
             <table class="table table-fixed">
                 <thead class="thead-light">
                 <tr>
@@ -110,70 +124,24 @@
                 </tr>
                 </thead>
                 <tbody>
-                <!-- <tr>
-                    <td><c:out value="${generalData.getCity().name}"/></td>
-                    <td><c:out value="${generalData.infected}"/></td>
-                    <td><c:out value="${generalData.critical}"/></td>
-                    <td><c:out value="${generalData.death}"/></td>
-                    <td><c:out value="${generalData.recovered}"/></td>
-                </tr> -->
                 <tr>
-                    <td>Hà Nội</td>
-                    <td>112</td>
-                    <td>0</td>
-                    <td>0</td>
-                    <td>83</td>
-                </tr>
+                    <c:forEach var="vnData" items="${vnData}">
                 <tr>
-                    <td>Hồ Chí Minh</td>
-                    <td>55</td>
-                    <td>0</td>
-                    <td>0</td>
-                    <td>50</td>
+                    <td><c:out value="${vnData.getCity().name}"/></td>
+                    <td><c:out value="${vnData.infected}"/></td>
+                    <td><c:out value="${vnData.critical}"/></td>
+                    <td><c:out value="${vnData.death}"/></td>
+                    <td><c:out value="${vnData.recovered}"/></td>
                 </tr>
-                <tr>
-                    <td>Vĩnh Phúc</td>
-                    <td>19</td>
-                    <td>0</td>
-                    <td>0</td>
-                    <td>14</td>
-                </tr>
-                <tr>
-                    <td>Ninh Bình</td>
-                    <td>13</td>
-                    <td>0</td>
-                    <td>0</td>
-                    <td>11</td>
-                </tr>
-                <tr>
-                    <td>Bình Thuận</td>
-                    <td>9</td>
-                    <td>0</td>
-                    <td>0</td>
-                    <td>8</td>
-                </tr>
-                <tr>
-                    <td>Quảng Ninh</td>
-                    <td>7</td>
-                    <td>0</td>
-                    <td>0</td>
-                    <td>5</td>
-                </tr>
-                <tr>
-                    <td>Đà Nẵng</td>
-                    <td>6</td>
-                    <td>0</td>
-                    <td>0</td>
-                    <td>6</td>
-                </tr>
+                </c:forEach>
                 </tbody>
             </table>
         </div>
     </div>
 </div>
-<div class="footer">
+<!-- <div class="footer">
     Copyright &copy; 2020 by Supernho Corp.
-</div>
+</div> -->
 
 <!--Opt JS-->
 <script src="./assets/vendor/jquery/jquery-3.3.1.min.js"></script>

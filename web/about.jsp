@@ -31,8 +31,14 @@
       <!--Navbar items-->
       <div class="collapse navbar-collapse" id="collapsibleNavbar">
           <ul class="navbar-nav mr-auto">
-              <li class="nav-item">
+              <li class="nav-item active">
                   <a class="nav-link" href="/">Home</a>
+              </li>
+              <li class="nav-item ">
+                  <a class="nav-link" href="world">World</a>
+              </li>
+              <li class="nav-item ">
+                  <a class="nav-link" href="continent">Continent</a>
               </li>
               <li class="nav-item active">
                   <a class="nav-link" href="#">About</a>
@@ -40,12 +46,12 @@
           </ul>
           <ul class="navbar-nav ml-auto">
               <li class="nav-item">
-                  <a class="nav-link" href="#">Sign In</a>
+                  <a class="nav-link" href="login?command=view">Sign In</a>
               </li>
           </ul>
       </div>
   </nav>
-  
+
   <div class="container-fluid">
       <div class="row">
           <div class="col">
@@ -53,16 +59,16 @@
           </div>
       </div>
   </div>
-  
+
   <div class="container">
     <br>
     <p>Group 9 - Students from FIT, Faculty of Information Technology - HANU, Hanoi University.
       <br> This is a project for SE2 course - Software Engineer 2.
   </p>
   </div>
-    <div class="footer">
+    <!-- <div class="footer">
       Copyright &copy; 2020 by Supernho Corp.
-    </div>
+    </div> -->
 
     <!--Opt JS-->
     <script src="./assets/vendor/jquery/jquery-3.3.1.min.js"></script>

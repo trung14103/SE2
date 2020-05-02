@@ -26,13 +26,13 @@ public class UserController extends HttpServlet {
     private static final String dateFormat = "yyyy-MM-dd";
 
     private UserService userService;
+
     public void init() {
-    	userService = new UserServiceImpl();
- 	}
-    private PatternChecker patternChecker;
+        userService = new UserServiceImpl();
+    }
 
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-       doGet(request, response);
+        doGet(request, response);
     }
 
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
@@ -63,7 +63,7 @@ public class UserController extends HttpServlet {
                 }
             case "delete":
                 try {
-                    deleteUser(request,response);
+                    deleteUser(request, response);
                     break;
                 } catch (SQLException throwables) {
                     throwables.printStackTrace();
@@ -98,25 +98,27 @@ public class UserController extends HttpServlet {
     private void updateUser(HttpServletRequest request, HttpServletResponse response)
             throws SQLException, IOException {
         request.setCharacterEncoding("utf-8");
-        response.setCharacterEncoding("utf-8");       
+        response.setCharacterEncoding("utf-8");
         Long id = Long.parseLong(request.getParameter("id"));
         String username = request.getParameter("username");
         String email = request.getParameter("email");
         String address = request.getParameter("address");
         String password = request.getParameter("password");
         String role = request.getParameter("role");
-        Date created_date = convertToDate(request.getParameter("created_date"));
+        Date created_date = new Date();
 
         String err = "";
         String url = "/user-form.jsp";
 
         if (username.isEmpty() || email.isEmpty() || address.isEmpty() || password.isEmpty() || role.isEmpty()) {
             err = "Please fill in necessary information";
-        } else {
-            if (!patternChecker.checkEmail(email)) {
-                err = "Invalid Email Format";
-            }
         }
+//        else {
+//            PatternChecker patternChecker = new PatternChecker();
+//            if (!patternChecker.checkEmail(email)) {
+//                err = "Invalid Email Format";
+//            }
+//        }
 
         if (err.length() > 0) {
             request.setAttribute("error", err);
@@ -124,9 +126,9 @@ public class UserController extends HttpServlet {
 
         try {
             if (err.length() == 0) {
-            	User user = new User(id, username, password, address, email, role, created_date);
+                User user = new User(id, username, password, address, email, role, created_date);
                 userService.updateUser(user);
-                url = "/home.jsp";
+                response.sendRedirect(request.getServletPath() + "?command=list");
             } else {
                 url = "/user-form.jsp";
             }
@@ -148,7 +150,7 @@ public class UserController extends HttpServlet {
         RequestDispatcher requestDispatcher = request.getRequestDispatcher("/user-form.jsp");
         requestDispatcher.forward(request, response);
     }
-  
+
     private void insertUser(HttpServletRequest request, HttpServletResponse response) throws IOException, ServletException {
 
         User user = new User();
@@ -163,20 +165,10 @@ public class UserController extends HttpServlet {
 
             userService.createUser(user);
             response.sendRedirect(request.getServletPath() + "?command=list");
-        } else {        
+        } else {
             RequestDispatcher dispatcher = request.getRequestDispatcher("/user-form.jsp");
             request.setAttribute("err", "User is already existed");
             dispatcher.forward(request, response);
         }
-    }
-
-    private static Date convertToDate(String dateString) {
-        Date date = null;
-        try {
-            date = new SimpleDateFormat(dateFormat).parse(dateString);
-        } catch (ParseException e) {
-            e.printStackTrace();
-        }
-        return date;
     }
 }

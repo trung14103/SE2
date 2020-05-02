@@ -10,23 +10,20 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import javax.servlet.http.HttpSession;
 import java.io.IOException;
 import java.util.List;
 
-@WebServlet(name = "HomeServlet", urlPatterns = "/")
-public class HomeServlet extends HttpServlet {
+@WebServlet(name = "WorldServlet", urlPatterns = "/world")
+public class WorldController extends HttpServlet {
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         doGet(request, response);
     }
 
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         GeneralDataService dataService = new GeneralDataServiceImpl();
-//        HttpSession session = request.getSession();
-//        session.setAttribute("role", null);
-        List<GeneralData> vnData = dataService.findCityOfVietnam();
-        request.setAttribute("vnData", vnData);
-        RequestDispatcher requestDispatcher = request.getRequestDispatcher("statistics.jsp");
+        List<GeneralData> generalData = dataService.findAll();
+        request.setAttribute("generalData", generalData);
+        RequestDispatcher requestDispatcher = request.getRequestDispatcher("world.jsp");
         requestDispatcher.forward(request, response);
     }
 }
