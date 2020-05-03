@@ -104,7 +104,10 @@ public class CountryServiceImpl implements CountryService {
         Connection con = DBConnect.getConnection();
         try {
             PreparedStatement ps = con.prepareStatement(DELETE_COUNTRY_BY_ID);
+            GeneralDataService generalDataService = new GeneralDataServiceImpl();
+            generalDataService.deleteGeneralData(generalDataService.findByCountryId(id).getId());
             ps.setLong(1, id);
+            ps.executeUpdate();
             con.close();
         } catch (SQLException throwables) {
             throwables.printStackTrace();
@@ -137,7 +140,7 @@ public class CountryServiceImpl implements CountryService {
         if (!countryName.isEmpty()) {
             Country flagUser = findCountryByName(countryName);
             if (oldCountryName == null) {
-                return flagUser.getId() == null;
+                return flagUser.getName() == null;
             } else {
                 return countryName.equals(oldCountryName) || flagUser.getName()  == null;
             }

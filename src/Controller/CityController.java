@@ -96,6 +96,10 @@ public class CityController extends HttpServlet {
         String cityName = request.getParameter("name");
         String countryName = request.getParameter("countryName");
         Country country = countryService.findCountryByName(countryName);
+        int recovered = Integer.parseInt(request.getParameter("recovered"));
+        int infected = Integer.parseInt(request.getParameter("infected"));
+        int critical = Integer.parseInt(request.getParameter("critical"));
+        int death = Integer.parseInt(request.getParameter("death"));
         String errCity = "";
         String errCountry = "";
         if (country.getId() == null) {
@@ -109,6 +113,10 @@ public class CityController extends HttpServlet {
         if (errCity.length() == 0 && errCountry.length() == 0) {
             city.setName(request.getParameter("name"));
             city.setCountryId(country.getId());
+            city.setCritical(critical);
+            city.setDeath(death);
+            city.setInfected(infected);
+            city.setRecovered(recovered);
             cityService.createCity(city);
             response.sendRedirect(request.getServletPath() + "?command=list");
         } else {
@@ -126,9 +134,12 @@ public class CityController extends HttpServlet {
         Long id = Long.parseLong(request.getParameter("id"));
         String name = request.getParameter("name");
         String oldName = request.getParameter("oldCityName");
-        String countryName = request.getParameter("countryName");
-        Country country = countryService.findCountryByName(countryName);
-        Long countryId = country.getId();
+        Long countryId = Long.parseLong(request.getParameter("countryId"));
+        Country country = countryService.findCountryById(countryId);
+        int recovered = Integer.parseInt(request.getParameter("recovered"));
+        int infected = Integer.parseInt(request.getParameter("infected"));
+        int critical = Integer.parseInt(request.getParameter("critical"));
+        int death = Integer.parseInt(request.getParameter("death"));
         String err = "";
         String url;
 
@@ -142,7 +153,7 @@ public class CityController extends HttpServlet {
 
         try {
             if (err.length() == 0) {
-                City city = new City(id, name, countryId, countryService.findCountryById(countryId));
+                City city = new City(id, name, countryId, recovered, infected, critical, death, countryService.findCountryById(countryId));
                 cityService.updateCity(city);
                 response.sendRedirect(request.getServletPath() + "?command=list");
             } else {

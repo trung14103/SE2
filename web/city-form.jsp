@@ -65,10 +65,10 @@
                     <div class="card">
                         <div class="card-body">
                             <c:if test="${city != null}">
-                            <form action="/city?command=update" method="post">
+                            <form action="city?command=update" method="post">
                                 </c:if>
                                 <c:if test="${city == null}">
-                                <form action="/city?command=insert" method="post">
+                                <form action="city?command=insert" method="post">
                                     </c:if>
 
                                     <caption>
@@ -85,9 +85,6 @@
                                     <c:if test="${city != null}">
                                         <input type="hidden" name="id" value="<c:out value='${city.id}' />"/>
                                         <input type="hidden" name="oldCityName" value="<c:out value='${city.name}' />"/>
-                                        <input id="inputCountryID" type="hidden" name="countryId"
-                                               placeholder="Country Name" required=""
-                                               value="<c:out value='${city.countryId}' />" class="form-control">
                                     </c:if>
 
                                     <div class="form-group">
@@ -96,19 +93,50 @@
                                                value="<c:out value='${city.name}' />" data-parsley-trigger="change"
                                                placeholder="City, Province Name" autocomplete="off"
                                                class="form-control">
+                                        <c:if test="${error!= null}">
+                                            <li style="color: red"><%=request.getAttribute("error")%></li>
+                                        </c:if>
                                         <c:if test="${errorCity!= null && errorCity != ''}">
                                             <li style="color: red"><%=request.getAttribute("errorCity")%></li>
                                         </c:if>
                                     </div>
                                     <div class="form-group">
                                         <label for="inputCountryID">Country ID</label>
-                                        <input id="inputCountryID" type="text" name="countryName"
-                                               placeholder="Country Name" required=""
-                                               value="<c:out value='${city.getCountry().name}' />" class="form-control">
+                                        <input id="inputCountryID" type="number" name="countryId"
+                                               placeholder="Country ID" required=""
+                                               value="<c:out value='${city.countryId}' />" class="form-control">
                                         <label id="err"></label>
                                         <c:if test="${errorCountry!= null && errorCountry != ''}">
                                             <li style="color: red"><%=request.getAttribute("errorCountry")%></li>
                                         </c:if>
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="inputInfected">Infected</label>
+                                        <input id="inputInfected" type="number" name="infected"
+                                               placeholder="Infected" required=""
+                                               value="<c:out value='${city.infected}' />" class="form-control">
+                                        <label id="err"></label>
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="inputCritical">Critical</label>
+                                        <input id="inputCritical" type="number" name="critical"
+                                               placeholder="Critical" required=""
+                                               value="<c:out value='${city.critical}' />" class="form-control">
+                                        <label id="err"></label>
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="inputDeath">Death</label>
+                                        <input id="inputDeath" type="number" name="death"
+                                               placeholder="Death" required=""
+                                               value="<c:out value='${city.death}' />" class="form-control">
+                                        <label id="err"></label>
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="inputRecover">Recover</label>
+                                        <input id="inputRecover" type="number" name="recovered"
+                                               placeholder="Recover" required=""
+                                               value="<c:out value='${city.recovered}' />" class="form-control">
+                                        <label id="err"></label>
                                     </div>
 
                                     <div class="row">

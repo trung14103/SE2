@@ -152,4 +152,62 @@ public class GeneralDataServiceImpl implements GeneralDataService {
         }
         return GeneralDataList;
     }
+
+    @Override
+    public GeneralData findByCountryId(Long id) {
+        Connection con = DBConnect.getConnection();
+        List<GeneralData> GeneralDataList = new ArrayList<>();
+        GeneralData GeneralData = new GeneralData();
+        try {
+            PreparedStatement ps = con.prepareStatement("SELECT * FROM covid_data WHERE country_id = ?");
+            ps.setLong(1, id);
+            ResultSet rs = ps.executeQuery();
+            while (rs.next()) {
+                GeneralData.setId(rs.getInt("id"));
+                GeneralData.setRecovered(rs.getInt("recovered"));
+                GeneralData.setInfected(rs.getInt("infected"));
+                GeneralData.setCritical(rs.getInt("critical"));
+                GeneralData.setDeath(rs.getInt("death"));
+                GeneralData.setCountry_id(rs.getLong("country_id"));
+                GeneralData.setCity_id(rs.getLong("city_id"));
+                GeneralData.setCity(cityService.findCityById(rs.getLong("city_id")));
+                GeneralData.setCountry(countryService.findCountryById(rs.getLong("country_id")));
+            }
+            con.close();
+        } catch (SQLException throwables) {
+            throwables.printStackTrace();
+        }
+
+        return GeneralData;
+    }
+
+    @Override
+    public List<GeneralData> findByContinent(String continent) {
+        Connection con = DBConnect.getConnection();
+        List<GeneralData> GeneralDataList = new ArrayList<>();
+        try {
+            PreparedStatement ps = con.prepareStatement("SELECT * FROM covid_data cd INNER JOIN countries co ON (cd.country_id = co.id) WHERE co.continent = ?");
+            ps.setString(1, continent);
+            ResultSet rs = ps.executeQuery();
+
+            while (rs.next()) {
+                GeneralData GeneralData = new GeneralData();
+                GeneralData.setId(rs.getInt("id"));
+                GeneralData.setRecovered(rs.getInt("recovered"));
+                GeneralData.setInfected(rs.getInt("infected"));
+                GeneralData.setCritical(rs.getInt("critical"));
+                GeneralData.setDeath(rs.getInt("death"));
+                GeneralData.setCountry_id(rs.getLong("country_id"));
+                GeneralData.setCity_id(rs.getLong("city_id"));
+                GeneralData.setCity(cityService.findCityById(rs.getLong("city_id")));
+                GeneralData.setCountry(countryService.findCountryById(rs.getLong("country_id")));
+                GeneralDataList.add(GeneralData);
+            }
+            con.close();
+        } catch (SQLException throwables) {
+            throwables.printStackTrace();
+        }
+
+        return GeneralDataList;
+    }
 }

@@ -73,23 +73,31 @@
                                     <tr>
                                         <th>ID</th>
                                         <th>City, Province</th>
-                                        <th>Country</th>
-                                        <th>Continent</th>
+                                        <!-- <th>Country</th>
+                                          <th>Continent</th> -->
+                                        <th>Infected</th>
+                                        <th>Critical</th>
+                                        <th>Death</th>
+                                        <th>Recover</th>
                                         <th>Actions</th>
                                     </tr>
                                     </thead>
                                     <tbody>
                                     <c:forEach var="city" items="${listCity}">
-                                    <tr>
-                                        <td><c:out value="${city.id}"/></td>
-                                        <td><c:out value="${city.name}"/></td>
-                                        <td><c:out value="${city.getCountry().name}"/></td>
-                                        <td><c:out value="${city.getCountry().continent}"/></td>
-                                        <td><a class="btn btn-info"
-                                               href=<%request.getServletPath();%>"?command=edit&id=<c:out value='${city.id}' />">Edit</a>
-                                            &nbsp;&nbsp;&nbsp;&nbsp; <a class="btn btn-danger"
-                                                                        href=<%request.getServletPath();%>"?command=delete&id=<c:out value='${city.id}' />">Delete</a>
-                                    </tr>
+                                        <tr>
+                                            <td><c:out value="${city.id}"/></td>
+                                            <td><c:out value="${city.name}"/></td>
+                                            <!--  <td><c:out value="${city.getCountry().name}"/></td>
+                                        <td><c:out value="${city.getCountry().continent}"/></td> -->
+                                            <td><c:out value="${city.infected}"/></td>
+                                            <td><c:out value="${city.critical}"/></td>
+                                            <td><c:out value="${city.death}"/></td>
+                                            <td><c:out value="${city.recovered}"/></td>
+                                            <td><a class="btn btn-info"
+                                                   href=<%request.getServletPath();%>"?command=edit&id=<c:out value='${city.id}' />">Edit</a>
+                                                &nbsp;&nbsp;&nbsp;&nbsp; <a class="btn btn-danger"
+                                                                            href=<%request.getServletPath();%>"?command=delete&id=<c:out value='${city.id}' />">Delete</a>
+                                        </tr>
                                     </c:forEach>
                                     </tbody>
                                     <tfoot>

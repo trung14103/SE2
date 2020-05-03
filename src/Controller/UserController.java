@@ -132,8 +132,8 @@ public class UserController extends HttpServlet {
                 url = "/user-form.jsp";
             }
             request.setAttribute("error", err);
-            RequestDispatcher requestDispatcher = getServletContext().getRequestDispatcher(url);
-            requestDispatcher.forward(request, response);
+            RequestDispatcher dispatcher = request.getRequestDispatcher(request.getServletPath() + "?command=edit&id=" + id);
+            dispatcher.forward(request, response);
         } catch (Exception e) {
             e.printStackTrace();
         }

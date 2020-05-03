@@ -86,7 +86,7 @@ public class CountryController extends HttpServlet {
         Country country = new Country();
         String name = request.getParameter("name");
 
-        if (!countryService.checkExistCountry(name, null)) {
+        if (countryService.checkExistCountry(name, null)) {
             country.setName(request.getParameter("name"));
             country.setUpdated_day(new Date());
             country.setContinent(request.getParameter("continent"));
