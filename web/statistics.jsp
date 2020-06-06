@@ -78,17 +78,17 @@
                 <div class="col-md-4">
                     <div class="cases">INFECTED
                         <br>
-                        <c:out value="${sumGlobal.infected}"/></div>
+                        <c:out value="${sumGlobal.totalInfected}"/></div>
                 </div>
                 <div class="col-md-4">
                     <div class="deaths">DEATHS
                         <br>
-                        <c:out value="${sumGlobal.death}"/></div>
+                        <c:out value="${sumGlobal.totalDeath}"/></div>
                 </div>
                 <div class="col-md-4">
                     <div class="recover">RECOVERED
                         <br>
-                        <c:out value="${sumGlobal.recovered}"/></div>
+                        <c:out value="${sumGlobal.totalRecovered}"/></div>
                 </div>
             </div>
         </div>

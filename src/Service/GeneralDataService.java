@@ -1,7 +1,10 @@
 package Service;
 
 import Model.GeneralData;
+import Response.TotalData;
 
+import java.io.IOException;
+import java.net.MalformedURLException;
 import java.util.List;
 
 public interface GeneralDataService {
@@ -20,6 +23,14 @@ public interface GeneralDataService {
 
     GeneralData findByCountryId(Long id);
 
-    public List<GeneralData> findByContinent(String continent);
-    
+    List<GeneralData> findByContinent(String continent);
+
+    TotalData sumStatistic();
+
+    void getDataAPI() throws IOException;
+
+    void saveSumData();
+
+    void saveSumAndGetDataManually();
+
 }

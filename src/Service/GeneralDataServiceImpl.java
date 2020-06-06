@@ -1,19 +1,37 @@
 package Service;
 
 import Model.GeneralData;
+import Response.TotalData;
 import Utils.DBConnect;
+import Utils.JsonConverter;
+import Utils.PatternChecker;
+import com.google.gson.JsonObject;
+import org.json.JSONArray;
+import org.json.JSONObject;
 
-import java.sql.Connection;
-import java.sql.PreparedStatement;
-import java.sql.ResultSet;
-import java.sql.SQLException;
+import java.io.BufferedReader;
+import java.io.IOException;
+import java.io.InputStreamReader;
+import java.net.HttpURLConnection;
+import java.net.URL;
+import java.sql.*;
+import java.time.LocalDateTime;
+import java.time.temporal.ChronoUnit;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.concurrent.Executors;
+import java.util.concurrent.ScheduledExecutorService;
+import java.util.concurrent.TimeUnit;
 
 public class GeneralDataServiceImpl implements GeneralDataService {
+    private static final String SUM_PRESENT_QUERY = "SELECT SUM(recovered) as totalRecovered, SUM(infected) as totalInfected, SUM(critical) as totalCritical, SUM(death) as totalDeath from covid_data  group by CAST(updated_day AS DATE)";
+
+    private static final String SAVE_TOTAL_DATA_QUERY = "INSERT INTO total_satistics (total_death, total_recovered, total_critical, total_infected) VALUES (?, ?, ?, ?)";
 
     private CityService cityService = new CityServiceImpl();
     private CountryService countryService = new CountryServiceImpl();
+
+    private JsonConverter jsonConverter = new JsonConverter();
 
     @Override
     public GeneralData findGeneralDataById(int id) {
@@ -34,6 +52,7 @@ public class GeneralDataServiceImpl implements GeneralDataService {
                 GeneralData.setCity_id(rs.getLong("city_id"));
                 GeneralData.setCity(cityService.findCityById(rs.getLong("city_id")));
                 GeneralData.setCountry(countryService.findCountryById(rs.getLong("country_id")));
+                GeneralData.setUpdatedDay(rs.getDate("updated_day"));
             }
             con.close();
         } catch (SQLException throwables) {
@@ -59,6 +78,7 @@ public class GeneralDataServiceImpl implements GeneralDataService {
                 GeneralData.setInfected(rs.getInt("infected"));
                 GeneralData.setCritical(rs.getInt("critical"));
                 GeneralData.setDeath(rs.getInt("death"));
+                GeneralData.setUpdatedDay(rs.getDate("updated_day"));
                 GeneralData.setCountry_id(rs.getLong("country_id"));
                 GeneralData.setCity_id(rs.getLong("city_id"));
                 GeneralData.setCity(cityService.findCityById(rs.getLong("city_id")));
@@ -74,20 +94,22 @@ public class GeneralDataServiceImpl implements GeneralDataService {
     }
 
     @Override
-    public void updateGeneralData(GeneralData GeneralData) {
+    public void updateGeneralData(GeneralData generalData) {
         Connection con = DBConnect.getConnection();
         String sql = "UPDATE covid_data SET recovered = ?, infected = ?,critical = ?, death = ?, country_id = ?," +
-                "city_id = ? WHERE id = ?";
+                "city_id = ?, updated_day = ? WHERE id = ?";
         try {
             PreparedStatement ps = con.prepareStatement(sql);
-            ps.setInt(1, GeneralData.getRecovered());
-            ps.setInt(2, GeneralData.getInfected());
-            ps.setInt(3, GeneralData.getCritical());
-            ps.setInt(4, GeneralData.getDeath());
-            ps.setLong(5, GeneralData.getCountry_id());
-            ps.setLong(6, GeneralData.getCity_id());
-            ps.setInt(7, GeneralData.getId());
+            ps.setInt(1, generalData.getRecovered());
+            ps.setInt(2, generalData.getInfected());
+            ps.setInt(3, generalData.getCritical());
+            ps.setInt(4, generalData.getDeath());
+            ps.setLong(5, generalData.getCountry_id());
+            ps.setLong(6, generalData.getCity_id());
+            ps.setInt(8, generalData.getId());
+            ps.setDate(7, convertDate(generalData.getUpdatedDay()));
             ps.executeUpdate();
+            con.close();
         } catch (SQLException throwables) {
             throwables.printStackTrace();
         }
@@ -96,8 +118,8 @@ public class GeneralDataServiceImpl implements GeneralDataService {
     @Override
     public void createGeneralData(GeneralData GeneralData) {
         Connection con = DBConnect.getConnection();
-        String sql = "INSERT INTO covid_data (recovered, infected, critical, death, country_id, city_id) VALUES" +
-                "(?,?,?,?,?,?)";
+        String sql = "INSERT INTO covid_data (recovered, infected, critical, death, country_id, city_id, updated_day) VALUES" +
+                "(?,?,?,?,?,?,?)";
         try {
             PreparedStatement ps = con.prepareStatement(sql);
             ps.setInt(1, GeneralData.getRecovered());
@@ -106,6 +128,7 @@ public class GeneralDataServiceImpl implements GeneralDataService {
             ps.setInt(4, GeneralData.getDeath());
             ps.setLong(5, GeneralData.getCountry_id());
             ps.setLong(6, GeneralData.getCity_id());
+            ps.setDate(7, convertDate(GeneralData.getUpdatedDay()));
             ps.executeUpdate();
         } catch (SQLException throwables) {
             throwables.printStackTrace();
@@ -144,6 +167,7 @@ public class GeneralDataServiceImpl implements GeneralDataService {
                 generalData.setCity_id(rs.getLong("city_id"));
                 generalData.setCity(cityService.findCityById(rs.getLong("city_id")));
                 generalData.setCountry(countryService.findCountryById(rs.getLong("country_id")));
+                generalData.setUpdatedDay(rs.getDate("updated_day"));
                 GeneralDataList.add(generalData);
             }
             con.close();
@@ -172,6 +196,7 @@ public class GeneralDataServiceImpl implements GeneralDataService {
                 GeneralData.setCity_id(rs.getLong("city_id"));
                 GeneralData.setCity(cityService.findCityById(rs.getLong("city_id")));
                 GeneralData.setCountry(countryService.findCountryById(rs.getLong("country_id")));
+                GeneralData.setUpdatedDay(rs.getDate("updated_day"));
             }
             con.close();
         } catch (SQLException throwables) {
@@ -201,6 +226,7 @@ public class GeneralDataServiceImpl implements GeneralDataService {
                 GeneralData.setCity_id(rs.getLong("city_id"));
                 GeneralData.setCity(cityService.findCityById(rs.getLong("city_id")));
                 GeneralData.setCountry(countryService.findCountryById(rs.getLong("country_id")));
+                GeneralData.setUpdatedDay(rs.getDate("updated_day"));
                 GeneralDataList.add(GeneralData);
             }
             con.close();
@@ -209,5 +235,134 @@ public class GeneralDataServiceImpl implements GeneralDataService {
         }
 
         return GeneralDataList;
+    }
+
+    @Override
+    public TotalData sumStatistic() {
+        Connection con = DBConnect.getConnection();
+        TotalData totalData = new TotalData();
+        try {
+            PreparedStatement ps = con.prepareStatement(SUM_PRESENT_QUERY);
+            ResultSet rs = ps.executeQuery();
+            while (rs.next()) {
+                totalData.setDayItem(new java.util.Date());
+                totalData.setTotalDeath(rs.getInt("totalDeath"));
+                totalData.setTotalInfected(rs.getInt("totalInfected"));
+                totalData.setTotalRecovered(rs.getInt("totalRecovered"));
+                totalData.setTotalCritical(rs.getInt("totalCritical"));
+            }
+            con.close();
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return totalData;
+    }
+
+    @Override
+    public void saveSumAndGetDataManually() {
+        final LocalDateTime now = LocalDateTime.now();
+        final LocalDateTime nineAMtoday = LocalDateTime.now()
+                .withHour(9)
+                .withMinute(0)
+                .withSecond(0)
+                .withNano(0);
+        final ScheduledExecutorService ses = Executors.newScheduledThreadPool(1);
+
+        ses.scheduleAtFixedRate(() -> {
+                    try {
+                        getDataAPI();
+                        saveSumData();
+                    } catch (IOException e) {
+                        e.printStackTrace();
+                    }
+                },
+                now.until(nineAMtoday, ChronoUnit.MILLIS),
+                TimeUnit.DAYS.toMillis(1),
+                TimeUnit.MILLISECONDS);
+    }
+
+    @Override
+    public void saveSumData() {
+        Connection connection = DBConnect.getConnection();
+        TotalData totalData = sumStatistic();
+        try {
+            PreparedStatement ps = connection.prepareStatement(SAVE_TOTAL_DATA_QUERY);
+            ps.setInt(1, totalData.getTotalDeath());
+            ps.setInt(2, totalData.getTotalRecovered());
+            ps.setInt(3, totalData.getTotalCritical());
+            ps.setInt(4, totalData.getTotalInfected());
+            ps.executeUpdate();
+            connection.close();
+        } catch (SQLException throwables) {
+            throwables.printStackTrace();
+        }
+    }
+
+    @Override
+    public void getDataAPI() throws IOException {
+        GeneralDataService generalDataService = new GeneralDataServiceImpl();
+        String url = "https://corona-api.com/countries";
+        URL obj = new URL(url);
+        HttpURLConnection con = (HttpURLConnection) obj.openConnection();
+        con.setRequestMethod("GET");
+        con.setRequestProperty("User-Agent", "Mozilla/5.0");
+        BufferedReader in = new BufferedReader(
+                new InputStreamReader(con.getInputStream()));
+        String inputLine;
+        StringBuilder response = new StringBuilder();
+        while ((inputLine = in.readLine()) != null) {
+            response.append(inputLine);
+        }
+        in.close();
+        JSONObject myResponse = new JSONObject(response.toString());
+        ArrayList<JSONObject> listdata = new ArrayList<JSONObject>();
+        JSONArray array = myResponse.getJSONArray("data");
+        List<GeneralData> generalDataList = generalDataService.findAll();
+
+        for (int i = 0; i < array.length(); i++) {
+            listdata.add(array.optJSONObject(i));
+        }
+
+        for (int i = 0; i < listdata.size(); i++) {
+            JSONObject covid_data = listdata.get(i).getJSONObject("latest_data");
+            JSONObject data = listdata.get(i);
+            GeneralData generalData = generalDataList.get(i);
+            generalData.setDeath(covid_data.getInt("deaths"));
+            generalData.setRecovered(covid_data.getInt("recovered"));
+            generalData.setCritical(covid_data.getInt("critical"));
+            generalData.setInfected(covid_data.getInt("confirmed"));
+            generalData.setUpdatedDay(new java.util.Date());
+            generalDataService.updateGeneralData(generalData);
+        }
+    }
+
+    private Date convertDate(java.util.Date dateUtil) {
+        if (dateUtil == null) {
+            return null;
+        }
+        return new Date(dateUtil.getTime());
+    }
+
+    private JsonObject getTotalDataJSON() {
+        Connection con = DBConnect.getConnection();
+        List<TotalData> totalDataList = new ArrayList<>();
+        try {
+            PreparedStatement ps = con.prepareStatement(SUM_PRESENT_QUERY);
+            ResultSet rs = ps.executeQuery();
+            while (rs.next()) {
+                TotalData totalData = new TotalData();
+                totalData.setDayItem(new java.util.Date());
+                totalData.setTotalDeath(rs.getInt("totalDeath"));
+                totalData.setTotalInfected(rs.getInt("totalInfected"));
+                totalData.setTotalRecovered(rs.getInt("totalRecovered"));
+                totalData.setTotalCritical(rs.getInt("totalCritical"));
+                totalDataList.add(totalData);
+            }
+            con.close();
+
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return jsonConverter.convertToJson(totalDataList);
     }
 }
