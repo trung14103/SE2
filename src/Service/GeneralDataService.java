@@ -33,4 +33,6 @@ public interface GeneralDataService {
 
     void saveSumAndGetDataManually();
 
+    List<TotalData> getAllTotalDat();
+
 }

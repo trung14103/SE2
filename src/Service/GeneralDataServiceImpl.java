@@ -3,9 +3,6 @@ package Service;
 import Model.GeneralData;
 import Response.TotalData;
 import Utils.DBConnect;
-import Utils.JsonConverter;
-import Utils.PatternChecker;
-import com.google.gson.JsonObject;
 import org.json.JSONArray;
 import org.json.JSONObject;
 
@@ -28,10 +25,10 @@ public class GeneralDataServiceImpl implements GeneralDataService {
 
     private static final String SAVE_TOTAL_DATA_QUERY = "INSERT INTO total_satistics (total_death, total_recovered, total_critical, total_infected) VALUES (?, ?, ?, ?)";
 
+    private static final String GET_ALL_DATA_QUERY = "SELECT * FROM total_satistics";
+
     private CityService cityService = new CityServiceImpl();
     private CountryService countryService = new CountryServiceImpl();
-
-    private JsonConverter jsonConverter = new JsonConverter();
 
     @Override
     public GeneralData findGeneralDataById(int id) {
@@ -336,18 +333,12 @@ public class GeneralDataServiceImpl implements GeneralDataService {
         }
     }
 
-    private Date convertDate(java.util.Date dateUtil) {
-        if (dateUtil == null) {
-            return null;
-        }
-        return new Date(dateUtil.getTime());
-    }
-
-    private JsonObject getTotalDataJSON() {
+    @Override
+    public List<TotalData> getAllTotalDat() {
         Connection con = DBConnect.getConnection();
         List<TotalData> totalDataList = new ArrayList<>();
         try {
-            PreparedStatement ps = con.prepareStatement(SUM_PRESENT_QUERY);
+            PreparedStatement ps = con.prepareStatement(GET_ALL_DATA_QUERY);
             ResultSet rs = ps.executeQuery();
             while (rs.next()) {
                 TotalData totalData = new TotalData();
@@ -359,10 +350,17 @@ public class GeneralDataServiceImpl implements GeneralDataService {
                 totalDataList.add(totalData);
             }
             con.close();
-
         } catch (SQLException e) {
             e.printStackTrace();
         }
-        return jsonConverter.convertToJson(totalDataList);
+        return totalDataList;
     }
+
+    private Date convertDate(java.util.Date dateUtil) {
+        if (dateUtil == null) {
+            return null;
+        }
+        return new Date(dateUtil.getTime());
+    }
+
 }
