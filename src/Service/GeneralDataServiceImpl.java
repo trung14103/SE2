@@ -23,9 +23,11 @@ import java.util.concurrent.TimeUnit;
 public class GeneralDataServiceImpl implements GeneralDataService {
     private static final String SUM_PRESENT_QUERY = "SELECT SUM(recovered) as totalRecovered, SUM(infected) as totalInfected, SUM(critical) as totalCritical, SUM(death) as totalDeath from covid_data  group by CAST(updated_day AS DATE)";
 
-    private static final String SAVE_TOTAL_DATA_QUERY = "INSERT INTO total_satistics (total_death, total_recovered, total_critical, total_infected) VALUES (?, ?, ?, ?)";
+    private static final String SAVE_TOTAL_DATA_QUERY = "INSERT INTO total_satistics (total_death, total_recovered, total_critical, total_infected, update_time) VALUES (?, ?, ?, ?, ?)";
 
     private static final String GET_ALL_DATA_QUERY = "SELECT * FROM total_satistics";
+
+    private static final String GET_TOP_STATE_QUERY = "Select * from covid_data where infected > 100000";
 
     private CityService cityService = new CityServiceImpl();
     private CountryService countryService = new CountryServiceImpl();
@@ -256,38 +258,15 @@ public class GeneralDataServiceImpl implements GeneralDataService {
     }
 
     @Override
-    public void saveSumAndGetDataManually() {
-        final LocalDateTime now = LocalDateTime.now();
-        final LocalDateTime nineAMtoday = LocalDateTime.now()
-                .withHour(9)
-                .withMinute(0)
-                .withSecond(0)
-                .withNano(0);
-        final ScheduledExecutorService ses = Executors.newScheduledThreadPool(1);
-
-        ses.scheduleAtFixedRate(() -> {
-                    try {
-                        getDataAPI();
-                        saveSumData();
-                    } catch (IOException e) {
-                        e.printStackTrace();
-                    }
-                },
-                now.until(nineAMtoday, ChronoUnit.MILLIS),
-                TimeUnit.DAYS.toMillis(1),
-                TimeUnit.MILLISECONDS);
-    }
-
-    @Override
-    public void saveSumData() {
+    public void saveSumData(TotalData totalData) {
         Connection connection = DBConnect.getConnection();
-        TotalData totalData = sumStatistic();
         try {
             PreparedStatement ps = connection.prepareStatement(SAVE_TOTAL_DATA_QUERY);
             ps.setInt(1, totalData.getTotalDeath());
             ps.setInt(2, totalData.getTotalRecovered());
             ps.setInt(3, totalData.getTotalCritical());
             ps.setInt(4, totalData.getTotalInfected());
+            ps.setDate(5, convertDate(totalData.getDayItem()));
             ps.executeUpdate();
             connection.close();
         } catch (SQLException throwables) {
@@ -334,7 +313,38 @@ public class GeneralDataServiceImpl implements GeneralDataService {
     }
 
     @Override
-    public List<TotalData> getAllTotalDat() {
+    public List<GeneralData> findCountryGreater5000() {
+        Connection con = DBConnect.getConnection();
+        List<GeneralData> GeneralDataList = new ArrayList<>();
+        try {
+            PreparedStatement ps = con.prepareStatement(GET_TOP_STATE_QUERY);
+
+            ResultSet rs = ps.executeQuery();
+
+            while (rs.next()) {
+                GeneralData GeneralData = new GeneralData();
+                GeneralData.setId(rs.getInt("id"));
+                GeneralData.setRecovered(rs.getInt("recovered"));
+                GeneralData.setInfected(rs.getInt("infected"));
+                GeneralData.setCritical(rs.getInt("critical"));
+                GeneralData.setDeath(rs.getInt("death"));
+                GeneralData.setUpdatedDay(rs.getDate("updated_day"));
+                GeneralData.setCountry_id(rs.getLong("country_id"));
+                GeneralData.setCity_id(rs.getLong("city_id"));
+                GeneralData.setCity(cityService.findCityById(rs.getLong("city_id")));
+                GeneralData.setCountry(countryService.findCountryById(rs.getLong("country_id")));
+                GeneralDataList.add(GeneralData);
+            }
+            con.close();
+        } catch (SQLException throwables) {
+            throwables.printStackTrace();
+        }
+
+        return GeneralDataList;
+    }
+
+    @Override
+    public List<TotalData> getAllTotalData() {
         Connection con = DBConnect.getConnection();
         List<TotalData> totalDataList = new ArrayList<>();
         try {
@@ -342,11 +352,11 @@ public class GeneralDataServiceImpl implements GeneralDataService {
             ResultSet rs = ps.executeQuery();
             while (rs.next()) {
                 TotalData totalData = new TotalData();
-                totalData.setDayItem(new java.util.Date());
-                totalData.setTotalDeath(rs.getInt("totalDeath"));
-                totalData.setTotalInfected(rs.getInt("totalInfected"));
-                totalData.setTotalRecovered(rs.getInt("totalRecovered"));
-                totalData.setTotalCritical(rs.getInt("totalCritical"));
+                totalData.setDayItem(rs.getDate("update_time"));
+                totalData.setTotalDeath(rs.getInt("total_death"));
+                totalData.setTotalInfected(rs.getInt("total_infected"));
+                totalData.setTotalRecovered(rs.getInt("total_recovered"));
+                totalData.setTotalCritical(rs.getInt("total_critical"));
                 totalDataList.add(totalData);
             }
             con.close();

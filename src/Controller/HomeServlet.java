@@ -34,7 +34,7 @@ public class HomeServlet extends HttpServlet {
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         List<City> vnData = cityService.findAll();
         GeneralData vietNamData = generalDataService.findByCountryId(Long.parseLong("230"));
-        generalDataService.saveSumAndGetDataManually();
+//        generalDataService.saveSumAndGetDataManually();
         request.setAttribute("ovnData", vietNamData);
         request.setAttribute("sumGlobal", generalDataService.sumStatistic());
         request.setAttribute("vnData", vnData);

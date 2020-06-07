@@ -27,12 +27,12 @@ public interface GeneralDataService {
 
     TotalData sumStatistic();
 
+    List<GeneralData> findCountryGreater5000();
+
     void getDataAPI() throws IOException;
 
-    void saveSumData();
+    void saveSumData(TotalData totalData);
 
-    void saveSumAndGetDataManually();
-
-    List<TotalData> getAllTotalDat();
+    List<TotalData> getAllTotalData();
 
 }
